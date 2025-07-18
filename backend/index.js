@@ -27,10 +27,8 @@ app.get("/",(req,res) => {
 app.use("/api/v1/auth",UserRoutes)
 
 // Courses
-app.use("/courses",CourseMiddleware ,CourseRoutes)
+app.use("/api/v1/courses",CourseMiddleware ,CourseRoutes)
 
-// Auth routes
-app.use("/api/v1/auth",UserRoutes)
 
 
 // Institute routes
