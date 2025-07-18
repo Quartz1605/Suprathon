@@ -346,8 +346,6 @@ const UserSignup = () => {
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   );
