@@ -16,7 +16,6 @@ export const addCourseController = async(req, res) =>{
     console.log(newCourse)
 }
 
-// To Get One Course
 export const getCourseDetailsController = async(req, res) => {
     const {id} = req.params
     try{
@@ -30,7 +29,6 @@ export const getCourseDetailsController = async(req, res) => {
     }
 }
 
-// To Get All Courses
 export const getAllCoursesController = async (req, res) => {
     try {
         const allCourses = await CourseModel.find();
