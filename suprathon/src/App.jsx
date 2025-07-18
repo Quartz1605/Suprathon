@@ -1,8 +1,9 @@
-import { useState } from 'react'
 import './App.css'
+import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import ProfilePage from './components/ProfilePage'
 import OrganizerPanel from './components/OrganizerPanel'
+import UserSignup from './User-Signup'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -13,6 +14,8 @@ function App() {
         return <ProfilePage />
       case 'organizer':
         return <OrganizerPanel />
+      case 'signup':
+        return <UserSignup />
       default:
         return (
           <div className="h-screen flex flex-col items-center justify-center" style={{ backgroundColor: '#FFFFFF' }}>
@@ -40,11 +43,11 @@ function App() {
                 Organizer Panel
               </Button>
               <Button 
-                variant="outline"
+                onClick={() => setCurrentPage('signup')}
                 className="px-8 py-3 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-lg border-2"
-                style={{ borderColor: '#1F7A8C', color: '#1F7A8C' }}
+                style={{ borderColor: '#1F7A8C', color: '#1F7A8C', backgroundColor: 'transparent' }}
               >
-                Get Started
+                Sign Up
               </Button>
             </div>
           </div>
@@ -99,6 +102,18 @@ function App() {
               }}
             >
               Organizer Panel
+            </button>
+            <button 
+              onClick={() => setCurrentPage('signup')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                currentPage === 'signup' ? 'text-white' : 'hover:bg-gray-100'
+              }`}
+              style={{ 
+                backgroundColor: currentPage === 'signup' ? '#022B3A' : 'transparent',
+                color: currentPage === 'signup' ? '#FFFFFF' : '#022B3A'
+              }}
+            >
+              Sign Up
             </button>
           </div>
         </div>

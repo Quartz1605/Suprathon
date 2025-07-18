@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser"
 import cors from "cors"
+import { UserRoutes } from "./auth/authRoutes.js"
 
 dotenv.config()
 
@@ -17,6 +18,8 @@ app.use(cors())
 app.get("/",(req,res) => {
   res.send("Welcome to the backend.")
 })
+
+app.use("/api/v1/auth",UserRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:3000`)
