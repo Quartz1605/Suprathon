@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser"
 import cors from "cors"
 import { UserRoutes } from "./auth/authRoutes.js"
 import { CourseRoutes } from "./courses/courseRoutes.js"
+import { InstituteRoutes } from "./institute/instituteRoutes.js"
 
 dotenv.config()
 
@@ -26,6 +27,12 @@ app.use("/api/v1/auth",UserRoutes)
 // Courses
 app.use("/courses", CourseRoutes)
 
+// Auth routes
+app.use("/api/v1/auth",UserRoutes)
+
+
+// Institute
+app.use("/api/v1/institute/auth",InstituteRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:3000`)

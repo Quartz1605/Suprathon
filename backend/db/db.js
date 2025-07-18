@@ -36,6 +36,40 @@ const UserSchema = new Schema({
 
 })
 
+const InstituteSchema = new Schema({
+  
+  name : {
+    type : String,
+    required : [true,"Name is required"]
+  },
+
+  description : {
+    type : String,
+    required : [true,"Description is required"]
+  },
+
+  address : {
+    type : String,
+  },
+
+  contactEmail : {
+    type : String,
+    required : [true,"Contact Email is mandatory"]
+  },
+
+  phone : {
+    type : Number,
+    required : [true ,"Phone Number is required."],
+    unique : true
+  },
+
+  password : {
+    type : String,
+    required : [true ,"Password is required."]
+  }
+  
+})
+
 const CourseSchema = new Schema({
   
   Title : {
@@ -71,9 +105,12 @@ const CourseSchema = new Schema({
   }
 })
 
-const UserModel = mongoose.model("Users",UserSchema)
+
+
 const CourseModel = mongoose.model("Courses",CourseSchema)
 
+const UserModel = mongoose.model("Users",UserSchema)
 
-export {UserModel}
-export {CourseModel}
+const InstituteModel = mongoose.model("Institutes",InstituteSchema)
+
+export {UserModel,InstituteModel,CourseModel}
