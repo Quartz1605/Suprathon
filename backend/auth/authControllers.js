@@ -10,7 +10,6 @@ const createToken = (email) => {
 
 }
 
-
 const userSignupController = async(req,res) => {
 
   const {email,password} = req.body
