@@ -15,7 +15,12 @@ function App() {
       case 'organizer':
         return <OrganizerPanel />
       case 'signup':
-        return <UserSignup />
+        return (
+          <div>
+            <h1>Testing Signup Page</h1>
+            <UserSignup />
+          </div>
+        )
       default:
         return (
           <div className="h-screen flex flex-col items-center justify-center" style={{ backgroundColor: '#FFFFFF' }}>

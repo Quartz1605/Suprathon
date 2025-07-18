@@ -76,7 +76,7 @@ const UserSignup = () => {
     setIsSubmitting(false);
   };
 
-  const InputField = ({  label, name, type = 'text', placeholder, value, onChange, error, rightIcon }) => (
+  const InputField = ({ icon: Icon, label, name, type = 'text', placeholder, value, onChange, error, rightIcon }) => (
     <div className="space-y-2">
       <label className="block text-sm font-medium text-white/90">
         {label}
@@ -148,9 +148,9 @@ const UserSignup = () => {
   };
 
   return (
-    <div className="min-h-screen w-full relative flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen w-full relative flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8" style={{position: 'relative', zIndex: 1}}>
       {/* Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0" style={{zIndex: -1}}>
         {/* Base dark background */}
         <div className="w-full h-full bg-slate-900"></div>
         
@@ -179,7 +179,7 @@ const UserSignup = () => {
       </div>
 
       {/* Floating Elements */}
-      <div className="absolute inset-0 z-10">
+      <div className="absolute inset-0" style={{zIndex: 0}}>
         {/* Modern floating elements */}
         <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-blue-400/60 rounded-full animate-ping"></div>
         <div className="absolute top-1/3 right-1/4 w-6 h-6 bg-purple-400/60 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
@@ -193,7 +193,7 @@ const UserSignup = () => {
       </div>
 
       {/* Main Form Container */}
-      <div className="relative z-20 w-full max-w-md">
+      <div className="relative" style={{zIndex: 10}}>
         {/* Glass Card */}
         <div className="bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-3xl">
           {/* Header */}
