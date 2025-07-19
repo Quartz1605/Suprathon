@@ -7,11 +7,11 @@ import { UserRoutes } from "./auth/authRoutes.js"
 import { CourseRoutes } from "./courses/courseRoutes.js"
 import { InstituteRoutes } from "./institute/instituteRoutes.js"
 import { EventRoutes } from "./events/eventRoutes.js"
-import { CourseMiddleware } from "./middlewares/CourseMiddleware.js"
+import { InstituteMiddleware } from "./middlewares/InstituteMiddleware.js"
 import { BookmarkRoutes } from "./bookmarks/bookmarkRoutes.js"
 import { DashboardRoutes } from "./dashboard/dashboardRoutes.js"
 import { RegistrationRoutes } from "./registrations/registrationRoutes.js"
-import { EventMiddleware } from "./middlewares/EventMiddleware.js"
+import { UserMiddleware } from "./middlewares/UserMiddleware.js"
 
 dotenv.config()
 
@@ -31,19 +31,19 @@ app.get("/",(req,res) => {
 app.use("/api/v1/auth",UserRoutes)
 
 // Courses
-app.use("/api/v1/courses",CourseMiddleware ,CourseRoutes)
+app.use("/api/v1/courses",InstituteMiddleware ,CourseRoutes)
 
 
 // Institute routes
 app.use("/api/v1/institute/auth",InstituteRoutes)
 
 // Events
-app.use("/api/v1/events",CourseMiddleware ,EventRoutes)
+app.use("/api/v1/events",InstituteMiddleware ,EventRoutes)
 
 
 //Registration routes
 
-app.use("/api/v1/registration",EventMiddleware,RegistrationRoutes)
+app.use("/api/v1/registration",UserMiddleware,RegistrationRoutes)
 
 
 //Bookmark Routes

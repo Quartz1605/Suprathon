@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 
-const EventMiddleware = (req,res,next) => {
+const InstituteMiddleware = (req,res,next) => {
 
   const token = req.cookies.jwt
 
@@ -11,12 +11,13 @@ const EventMiddleware = (req,res,next) => {
   const isVerified = jwt.verify(token,process.env.JWT_SECRET);
 
   if(isVerified){
-    req.email = isVerified.email
+    req.id = isVerified.id
+    console.log(req.id)
     next();
   }else{
-    return res.status(403).send("Tokens are expired")
+    res.status(403).send("Tokens are expired")
   }
 
 }
 
-export {EventMiddleware}
+export {InstituteMiddleware}
