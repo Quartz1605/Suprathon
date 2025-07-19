@@ -21,38 +21,41 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
 
   return (
     <nav className="bg-white shadow-lg border-b-2 border-[#E1E5F2] sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex items-center cursor-pointer" onClick={() => setCurrentPage('home')}>
-            <div className="text-2xl font-bold text-[#022B3A]">
-              EduConnect Pro
+      <div className="w-full px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Left Section - Logo and Navigation */}
+          <div className="flex items-center space-x-6">
+            {/* Logo */}
+            <div className="flex items-center cursor-pointer" onClick={() => setCurrentPage('home')}>
+              <div className="text-2xl font-bold text-[#022B3A]">
+                EduConnect Pro
+              </div>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setCurrentPage(item.id)}
+                    className={cn(
+                      "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200",
+                      currentPage === item.id
+                        ? "bg-[#1F7A8C] text-white"
+                        : "text-[#022B3A] hover:bg-[#E1E5F2] hover:text-[#1F7A8C]"
+                    )}
+                  >
+                    <Icon className="w-4 h-4 mr-2" />
+                    {item.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setCurrentPage(item.id)}
-                  className={cn(
-                    "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200",
-                    currentPage === item.id
-                      ? "bg-[#1F7A8C] text-white"
-                      : "text-[#022B3A] hover:bg-[#E1E5F2] hover:text-[#1F7A8C]"
-                  )}
-                >
-                  <Icon className="w-4 h-4 mr-2" />
-                  {item.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Right side - Search, Notifications, User */}
+          {/* Right Section - Search, Notifications, User */}
           <div className="hidden md:flex items-center space-x-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#1F7A8C] w-4 h-4" />
@@ -86,26 +89,24 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
               </div>
             ) : (
               <div className="flex items-center space-x-2">
-                <Button
-                  variant="outline"
-                  size="sm"
+                <button
                   onClick={() => setCurrentPage('login')}
+                  className="flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-[#022B3A] hover:bg-[#E1E5F2] hover:text-[#1F7A8C]"
                 >
                   Login
-                </Button>
-                <Button
-                  variant="default"
-                  size="sm"
+                </button>
+                <button
                   onClick={() => setCurrentPage('signup')}
+                  className="flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-[#022B3A] hover:bg-[#E1E5F2] hover:text-[#1F7A8C]"
                 >
                   Sign Up
-                </Button>
+                </button>
               </div>
             )}
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden ml-auto">
             <button
               onClick={toggleMobileMenu}
               className="p-2 rounded-lg text-[#022B3A] hover:bg-[#E1E5F2] transition-colors"
