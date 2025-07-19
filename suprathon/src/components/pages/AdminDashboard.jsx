@@ -35,6 +35,7 @@ import {
 const AdminDashboard = ({ setCurrentPage }) => {
   const [activeTab, setActiveTab] = useState("overview");
   const [showCreateEventForm, setShowCreateEventForm] = useState(false);
+  const [showCreateCourseForm, setShowCreateCourseForm] = useState(false);
   const [eventForm, setEventForm] = useState({
     title: '',
     provider: '',
@@ -59,6 +60,30 @@ const AdminDashboard = ({ setCurrentPage }) => {
     zoomLink: '',
     eventImage: '',
     registrationDeadline: ''
+  });
+  const [courseForm, setCourseForm] = useState({
+    title: '',
+    provider: '',
+    category: 'Programming',
+    level: 'Beginner',
+    duration: '',
+    rating: '4.8',
+    totalReviews: '',
+    description: '',
+    price: '7999',
+    originalPrice: '12999',
+    tags: '',
+    isBestseller: false,
+    hasLifetimeAccess: false,
+    hasCertificate: false,
+    courseImage: '',
+    courseType: 'Bootcamp',
+    learningOutcomes: '',
+    prerequisites: '',
+    courseStructure: '',
+    instructorName: '',
+    instructorBio: '',
+    enrollmentCount: '45k'
   });
 
   // Enhanced mock data with comprehensive analytics
@@ -290,6 +315,75 @@ const AdminDashboard = ({ setCurrentPage }) => {
     setShowCreateEventForm(false);
   };
 
+  const handleCourseFormChange = (field, value) => {
+    setCourseForm(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleCourseSubmit = (e) => {
+    e.preventDefault();
+    console.log('Course created:', courseForm);
+    // Here you would typically submit to backend
+    
+    // Reset form and close modal
+    setCourseForm({
+      title: '',
+      provider: '',
+      category: 'Programming',
+      level: 'Beginner',
+      duration: '',
+      rating: '4.8',
+      totalReviews: '',
+      description: '',
+      price: '7999',
+      originalPrice: '12999',
+      tags: '',
+      isBestseller: false,
+      hasLifetimeAccess: false,
+      hasCertificate: false,
+      courseImage: '',
+      courseType: 'Bootcamp',
+      learningOutcomes: '',
+      prerequisites: '',
+      courseStructure: '',
+      instructorName: '',
+      instructorBio: '',
+      enrollmentCount: '45k'
+    });
+    setShowCreateCourseForm(false);
+    alert('Course created successfully!');
+  };
+
+  const handleCancelCourseForm = () => {
+    setCourseForm({
+      title: '',
+      provider: '',
+      category: 'Programming',
+      level: 'Beginner',
+      duration: '',
+      rating: '4.8',
+      totalReviews: '',
+      description: '',
+      price: '7999',
+      originalPrice: '12999',
+      tags: '',
+      isBestseller: false,
+      hasLifetimeAccess: false,
+      hasCertificate: false,
+      courseImage: '',
+      courseType: 'Bootcamp',
+      learningOutcomes: '',
+      prerequisites: '',
+      courseStructure: '',
+      instructorName: '',
+      instructorBio: '',
+      enrollmentCount: '45k'
+    });
+    setShowCreateCourseForm(false);
+  };
+
   const handleApproveEvent = (eventId) => {
     console.log('Approving event:', eventId);
     // Handle event approval logic
@@ -424,13 +518,22 @@ const AdminDashboard = ({ setCurrentPage }) => {
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-semibold text-[#022B3A]">Event Management</h2>
-              <Button 
-                className="gap-2 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white"
-                onClick={() => setShowCreateEventForm(true)}
-              >
-                <Plus className="h-4 w-4" />
-                Add New Event
-              </Button>
+              <div className="flex gap-3">
+                <Button 
+                  className="gap-2 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white"
+                  onClick={() => setShowCreateEventForm(true)}
+                >
+                  <Plus className="h-4 w-4" />
+                  Add New Event
+                </Button>
+                <Button 
+                  className="gap-2 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white"
+                  onClick={() => setShowCreateCourseForm(true)}
+                >
+                  <Plus className="h-4 w-4" />
+                  Create Course
+                </Button>
+              </div>
             </div>
 
             {/* Pending Approvals */}
@@ -1181,6 +1284,347 @@ const AdminDashboard = ({ setCurrentPage }) => {
                     type="button"
                     variant="outline" 
                     onClick={handleCancelEventForm}
+                    className="flex-1 border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 font-semibold py-4 px-6 rounded-lg transition-all duration-200"
+                  >
+                    <X className="w-5 h-5 mr-2" />
+                    Cancel
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Create Course Modal */}
+      {showCreateCourseForm && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[95vh] overflow-y-auto">
+            <div className="p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                  <Plus className="w-7 h-7 text-teal-600" />
+                  Create New Course
+                </h2>
+                <button 
+                  onClick={handleCancelCourseForm}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+              <form onSubmit={handleCourseSubmit} className="space-y-8">
+                {/* Basic Course Information */}
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200">
+                  <h3 className="text-lg font-bold text-blue-900 mb-4 flex items-center gap-2">
+                    <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">1</span>
+                    </div>
+                    Basic Course Information
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Course Title *</label>
+                      <input
+                        type="text"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors"
+                        placeholder="Complete Web Development Bootcamp"
+                        value={courseForm.title}
+                        onChange={(e) => handleCourseFormChange('title', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Provider *</label>
+                      <input
+                        type="text"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors"
+                        placeholder="TechAcademy Pro"
+                        value={courseForm.provider}
+                        onChange={(e) => handleCourseFormChange('provider', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Category *</label>
+                      <select
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors"
+                        value={courseForm.category}
+                        onChange={(e) => handleCourseFormChange('category', e.target.value)}
+                      >
+                        <option value="Programming">Programming</option>
+                        <option value="Design">Design</option>
+                        <option value="Business">Business</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="AI & ML">AI & ML</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Mobile Development">Mobile Development</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Course Type *</label>
+                      <select
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors"
+                        value={courseForm.courseType}
+                        onChange={(e) => handleCourseFormChange('courseType', e.target.value)}
+                      >
+                        <option value="Bootcamp">Bootcamp</option>
+                        <option value="Course">Course</option>
+                        <option value="Masterclass">Masterclass</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Certification">Certification Program</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Course Details */}
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200">
+                  <h3 className="text-lg font-bold text-green-900 mb-4 flex items-center gap-2">
+                    <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">2</span>
+                    </div>
+                    Course Details & Difficulty
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Level *</label>
+                      <select
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-0 transition-colors"
+                        value={courseForm.level}
+                        onChange={(e) => handleCourseFormChange('level', e.target.value)}
+                      >
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="All Levels">All Levels</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Duration</label>
+                      <input
+                        type="text"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-0 transition-colors"
+                        placeholder="20w"
+                        value={courseForm.duration}
+                        onChange={(e) => handleCourseFormChange('duration', e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Total Reviews</label>
+                      <input
+                        type="text"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-0 transition-colors"
+                        placeholder="2547"
+                        value={courseForm.totalReviews}
+                        onChange={(e) => handleCourseFormChange('totalReviews', e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Pricing & Features */}
+                <div className="bg-gradient-to-br from-yellow-50 to-orange-50 p-6 rounded-xl border border-yellow-200">
+                  <h3 className="text-lg font-bold text-orange-900 mb-4 flex items-center gap-2">
+                    <div className="w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">3</span>
+                    </div>
+                    Pricing & Features
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Price (₹) *</label>
+                      <input
+                        type="text"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-orange-500 focus:ring-0 transition-colors"
+                        placeholder="7999"
+                        value={courseForm.price}
+                        onChange={(e) => handleCourseFormChange('price', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Original Price (₹)</label>
+                      <input
+                        type="text"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-orange-500 focus:ring-0 transition-colors"
+                        placeholder="12999"
+                        value={courseForm.originalPrice}
+                        onChange={(e) => handleCourseFormChange('originalPrice', e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Enrollment Count</label>
+                      <input
+                        type="text"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-orange-500 focus:ring-0 transition-colors"
+                        placeholder="45k"
+                        value={courseForm.enrollmentCount}
+                        onChange={(e) => handleCourseFormChange('enrollmentCount', e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Rating</label>
+                      <input
+                        type="text"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-orange-500 focus:ring-0 transition-colors"
+                        placeholder="4.8"
+                        value={courseForm.rating}
+                        onChange={(e) => handleCourseFormChange('rating', e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-6 space-y-4">
+                    <h4 className="font-semibold text-gray-800 mb-3">Course Features</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <label className="flex items-center space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:border-orange-300 transition-colors cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={courseForm.isBestseller}
+                          onChange={(e) => handleCourseFormChange('isBestseller', e.target.checked)}
+                          className="text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                        />
+                        <span className="text-sm font-semibold text-gray-700">Bestseller</span>
+                      </label>
+                      <label className="flex items-center space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:border-orange-300 transition-colors cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={courseForm.hasLifetimeAccess}
+                          onChange={(e) => handleCourseFormChange('hasLifetimeAccess', e.target.checked)}
+                          className="text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                        />
+                        <span className="text-sm font-semibold text-gray-700">Lifetime Access</span>
+                      </label>
+                      <label className="flex items-center space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:border-orange-300 transition-colors cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={courseForm.hasCertificate}
+                          onChange={(e) => handleCourseFormChange('hasCertificate', e.target.checked)}
+                          className="text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                        />
+                        <span className="text-sm font-semibold text-gray-700">Certificate</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Course Content */}
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-200">
+                  <h3 className="text-lg font-bold text-purple-900 mb-4 flex items-center gap-2">
+                    <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">4</span>
+                    </div>
+                    Course Content & Structure
+                  </h3>
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Course Description *</label>
+                      <textarea
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:ring-0 transition-colors h-32 resize-none"
+                        placeholder="Master web development with this comprehensive course covering frontend and backend technologies."
+                        value={courseForm.description}
+                        onChange={(e) => handleCourseFormChange('description', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">Learning Outcomes</label>
+                        <textarea
+                          className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:ring-0 transition-colors h-24 resize-none"
+                          placeholder="What students will learn after completing this course"
+                          value={courseForm.learningOutcomes}
+                          onChange={(e) => handleCourseFormChange('learningOutcomes', e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">Prerequisites</label>
+                        <textarea
+                          className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:ring-0 transition-colors h-24 resize-none"
+                          placeholder="Required knowledge or skills before taking this course"
+                          value={courseForm.prerequisites}
+                          onChange={(e) => handleCourseFormChange('prerequisites', e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Course Structure</label>
+                      <textarea
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:ring-0 transition-colors h-32 resize-none"
+                        placeholder="Modules, chapters, or sections breakdown"
+                        value={courseForm.courseStructure}
+                        onChange={(e) => handleCourseFormChange('courseStructure', e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Instructor & Additional Information */}
+                <div className="bg-gradient-to-br from-gray-50 to-slate-50 p-6 rounded-xl border border-gray-200">
+                  <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <div className="w-6 h-6 bg-slate-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-bold">5</span>
+                    </div>
+                    Instructor & Additional Information
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Instructor Name</label>
+                      <input
+                        type="text"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-slate-500 focus:ring-0 transition-colors"
+                        placeholder="John Doe"
+                        value={courseForm.instructorName}
+                        onChange={(e) => handleCourseFormChange('instructorName', e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Tags (comma separated)</label>
+                      <input
+                        type="text"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-slate-500 focus:ring-0 transition-colors"
+                        placeholder="JavaScript, React, +2"
+                        value={courseForm.tags}
+                        onChange={(e) => handleCourseFormChange('tags', e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Course Image URL</label>
+                      <input
+                        type="url"
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-slate-500 focus:ring-0 transition-colors"
+                        placeholder="https://example.com/course-image.jpg"
+                        value={courseForm.courseImage}
+                        onChange={(e) => handleCourseFormChange('courseImage', e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Instructor Bio</label>
+                      <textarea
+                        className="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-slate-500 focus:ring-0 transition-colors h-24 resize-none"
+                        placeholder="Brief background about the instructor"
+                        value={courseForm.instructorBio}
+                        onChange={(e) => handleCourseFormChange('instructorBio', e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Submit Buttons */}
+                <div className="flex gap-4 pt-6 border-t border-gray-200">
+                  <Button 
+                    type="submit"
+                    className="flex-1 bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+                  >
+                    <Plus className="w-5 h-5 mr-2" />
+                    Create Course
+                  </Button>
+                  <Button 
+                    type="button"
+                    variant="outline" 
+                    onClick={handleCancelCourseForm}
                     className="flex-1 border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 font-semibold py-4 px-6 rounded-lg transition-all duration-200"
                   >
                     <X className="w-5 h-5 mr-2" />
