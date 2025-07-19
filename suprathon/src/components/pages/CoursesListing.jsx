@@ -32,7 +32,8 @@ const CoursesListing = ({ setCurrentPage }) => {
       instructor: "John Smith",
       lastUpdated: "2025-01-15",
       bestseller: true,
-      features: ["Lifetime Access", "Certificate", "30-day Money Back"]
+      features: ["Lifetime Access", "Certificate", "30-day Money Back"],
+      image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&h=400&fit=crop&crop=center"
     },
     {
       id: 2,
@@ -51,7 +52,8 @@ const CoursesListing = ({ setCurrentPage }) => {
       instructor: "Dr. Sarah Johnson",
       lastUpdated: "2025-01-10",
       bestseller: false,
-      features: ["Hands-on Projects", "Certificate", "Career Support"]
+      features: ["Hands-on Projects", "Certificate", "Career Support"],
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop&crop=center"
     },
     {
       id: 3,
@@ -70,7 +72,8 @@ const CoursesListing = ({ setCurrentPage }) => {
       instructor: "Mark Wilson",
       lastUpdated: "2025-01-08",
       bestseller: true,
-      features: ["Live Sessions", "Certificate", "Job Assistance"]
+      features: ["Live Sessions", "Certificate", "Job Assistance"],
+      image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=800&h=400&fit=crop&crop=center"
     },
     {
       id: 4,
@@ -89,7 +92,8 @@ const CoursesListing = ({ setCurrentPage }) => {
       instructor: "Emma Davis",
       lastUpdated: "2025-01-12",
       bestseller: false,
-      features: ["Design Resources", "Portfolio Review", "Certificate"]
+      features: ["Design Resources", "Portfolio Review", "Certificate"],
+      image: "https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=800&h=400&fit=crop&crop=center"
     },
     {
       id: 5,
@@ -108,7 +112,8 @@ const CoursesListing = ({ setCurrentPage }) => {
       instructor: "Alex Chen",
       lastUpdated: "2025-01-14",
       bestseller: true,
-      features: ["Real Projects", "Code Reviews", "Certificate"]
+      features: ["Real Projects", "Code Reviews", "Certificate"],
+      image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&h=400&fit=crop&crop=center"
     },
     {
       id: 6,
@@ -127,7 +132,8 @@ const CoursesListing = ({ setCurrentPage }) => {
       instructor: "Robert Taylor",
       lastUpdated: "2025-01-09",
       bestseller: false,
-      features: ["Case Studies", "Mentorship", "Certificate"]
+      features: ["Case Studies", "Mentorship", "Certificate"],
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop&crop=center"
     }
   ];
 
@@ -233,8 +239,20 @@ const CoursesListing = ({ setCurrentPage }) => {
             {sortedCourses.map((course) => (
               <Card key={course.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col h-full w-full max-w-full">
                 <div className="relative w-full">
-                  <div className="w-full h-36 sm:h-44 md:h-48 bg-gradient-to-br from-[#1F7A8C] to-[#022B3A] rounded-t-xl flex items-center justify-center">
-                    <BookOpen className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-white" />
+                  <div className="w-full h-36 sm:h-44 md:h-48 bg-gray-200 rounded-t-xl overflow-hidden">
+                    <img 
+                      src={course.image} 
+                      alt={course.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                    {/* Fallback gradient with icon */}
+                    <div className="w-full h-full bg-gradient-to-br from-[#1F7A8C] to-[#022B3A] rounded-t-xl flex items-center justify-center" style={{display: 'none'}}>
+                      <BookOpen className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-white" />
+                    </div>
                   </div>
                   
                   {/* Badges */}

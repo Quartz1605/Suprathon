@@ -12,6 +12,7 @@ const CourseDetails = ({ setCurrentPage }) => {
     id: 1,
     title: "Complete Web Development Bootcamp",
     provider: "TechAcademy Pro",
+    image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=1200&h=600&fit=crop&crop=center",
     instructor: {
       name: "John Smith",
       title: "Senior Full Stack Developer",
@@ -516,10 +517,24 @@ const CourseDetails = ({ setCurrentPage }) => {
             <Card className="sticky top-8">
               <CardContent className="p-6">
                 {/* Course Preview */}
-                <div className="w-full h-48 bg-gradient-to-br from-[#1F7A8C] to-[#022B3A] rounded-lg mb-6 flex items-center justify-center">
-                  <Button variant="ghost" className="text-white">
-                    <Play className="w-8 h-8" />
-                  </Button>
+                <div className="w-full h-48 bg-gray-200 rounded-lg mb-6 relative overflow-hidden">
+                  <img 
+                    src={course.image} 
+                    alt={course.title}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="w-full h-full bg-gradient-to-br from-[#1F7A8C] to-[#022B3A] rounded-lg flex items-center justify-center absolute inset-0" style={{display: 'none'}}>
+                    <Play className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                    <Button variant="ghost" className="text-white hover:bg-white/20">
+                      <Play className="w-8 h-8" />
+                    </Button>
+                  </div>
                 </div>
 
                 {/* Pricing */}

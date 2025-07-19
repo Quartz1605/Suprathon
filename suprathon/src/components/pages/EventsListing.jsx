@@ -40,7 +40,8 @@ const EventsListing = ({ setCurrentPage }) => {
       certificateProvided: true,
       level: "Beginner",
       language: "English",
-      platform: "Zoom"
+      platform: "Zoom",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop&crop=center"
     },
     {
       id: 2,
@@ -67,7 +68,8 @@ const EventsListing = ({ setCurrentPage }) => {
       certificateProvided: true,
       level: "Intermediate",
       language: "English",
-      platform: "Google Meet"
+      platform: "Google Meet",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop&crop=center"
     },
     {
       id: 3,
@@ -93,7 +95,8 @@ const EventsListing = ({ setCurrentPage }) => {
       certificateProvided: false,
       level: "All",
       language: "English",
-      platform: "YouTube Live"
+      platform: "YouTube Live",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop&crop=center"
     },
     {
       id: 4,
@@ -120,7 +123,8 @@ const EventsListing = ({ setCurrentPage }) => {
       certificateProvided: true,
       level: "Advanced",
       language: "English",
-      platform: "Custom Platform"
+      platform: "Custom Platform",
+      image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800&h=400&fit=crop&crop=center"
     },
     {
       id: 5,
@@ -146,7 +150,8 @@ const EventsListing = ({ setCurrentPage }) => {
       certificateProvided: false,
       level: "Beginner",
       language: "English",
-      platform: "Zoom"
+      platform: "Zoom",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&crop=center"
     },
     {
       id: 6,
@@ -173,7 +178,8 @@ const EventsListing = ({ setCurrentPage }) => {
       certificateProvided: true,
       level: "Intermediate",
       language: "English",
-      platform: "In-Person + Online"
+      platform: "In-Person + Online",
+      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=400&fit=crop&crop=center"
     }
   ];
 
@@ -306,11 +312,23 @@ const EventsListing = ({ setCurrentPage }) => {
             return (
               <Card key={event.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
                 <div className="relative">
-                  <div className="w-full h-48 bg-gradient-to-br from-[#1F7A8C] to-[#022B3A] rounded-t-xl flex items-center justify-center">
-                    {event.type === 'Webinar' && <Video className="w-16 h-16 text-white" />}
-                    {event.type === 'Workshop' && <Users className="w-16 h-16 text-white" />}
-                    {event.type === 'Seminar' && <User className="w-16 h-16 text-white" />}
-                    {!['Webinar', 'Workshop', 'Seminar'].includes(event.type) && <Calendar className="w-16 h-16 text-white" />}
+                  <div className="w-full h-48 bg-gray-200 rounded-t-xl overflow-hidden">
+                    <img 
+                      src={event.image} 
+                      alt={event.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                    {/* Fallback gradient with icon */}
+                    <div className="w-full h-full bg-gradient-to-br from-[#1F7A8C] to-[#022B3A] rounded-t-xl flex items-center justify-center" style={{display: 'none'}}>
+                      {event.type === 'Webinar' && <Video className="w-16 h-16 text-white" />}
+                      {event.type === 'Workshop' && <Users className="w-16 h-16 text-white" />}
+                      {event.type === 'Seminar' && <User className="w-16 h-16 text-white" />}
+                      {!['Webinar', 'Workshop', 'Seminar'].includes(event.type) && <Calendar className="w-16 h-16 text-white" />}
+                    </div>
                   </div>
                   
                   {/* Status Badge */}

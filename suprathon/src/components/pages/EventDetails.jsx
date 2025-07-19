@@ -12,6 +12,7 @@ const EventDetails = ({ setCurrentPage }) => {
     id: 1,
     title: "National Hackathon 2025",
     organizer: "TechCorp",
+    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&h=600&fit=crop&crop=center",
     organizerProfile: {
       name: "TechCorp Innovation Hub",
       type: "Technology Company",
@@ -173,6 +174,33 @@ const EventDetails = ({ setCurrentPage }) => {
                   </div>
                 </div>
               </CardHeader>
+            </Card>
+
+            {/* Event Image */}
+            <Card className="mb-6 overflow-hidden">
+              <div className="w-full h-64 sm:h-80 bg-gray-200 relative">
+                <img 
+                  src={event.image} 
+                  alt={event.title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="w-full h-full bg-gradient-to-br from-[#1F7A8C] to-[#022B3A] flex items-center justify-center absolute inset-0" style={{display: 'none'}}>
+                  <Calendar className="w-16 h-16 text-white" />
+                </div>
+                <div className="absolute inset-0 bg-black/20 flex items-end">
+                  <div className="p-6 text-white">
+                    <Badge variant="secondary" className="mb-2">
+                      {event.category}
+                    </Badge>
+                    <h2 className="text-2xl font-bold mb-2">{event.title}</h2>
+                    <p className="text-lg opacity-90">{event.shortDesc}</p>
+                  </div>
+                </div>
+              </div>
             </Card>
 
             {/* Event Stats */}
