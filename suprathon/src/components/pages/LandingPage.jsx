@@ -14,7 +14,7 @@ const LandingPage = ({ setCurrentPage }) => {
       rating: 4.8,
       students: 1250,
       duration: "12 weeks",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop&crop=center",
       category: "Programming",
       level: "Advanced"
     },
@@ -26,7 +26,7 @@ const LandingPage = ({ setCurrentPage }) => {
       rating: 4.9,
       students: 890,
       duration: "8 weeks",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&crop=center",
       category: "Marketing",
       level: "Intermediate"
     },
@@ -38,7 +38,7 @@ const LandingPage = ({ setCurrentPage }) => {
       rating: 4.7,
       students: 2100,
       duration: "16 weeks",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&crop=center",
       category: "Data Science",
       level: "Beginner"
     }
@@ -185,8 +185,20 @@ const LandingPage = ({ setCurrentPage }) => {
             {featuredCourses.map((course) => (
               <Card key={course.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                 <div className="relative">
-                  <div className="w-full h-48 bg-gradient-to-br from-[#1F7A8C] to-[#022B3A] rounded-t-xl flex items-center justify-center">
-                    <BookOpen className="w-16 h-16 text-white" />
+                  <div className="w-full h-48 bg-gray-200 rounded-t-xl overflow-hidden">
+                    <img 
+                      src={course.image} 
+                      alt={course.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                    {/* Fallback gradient with icon */}
+                    <div className="w-full h-full bg-gradient-to-br from-[#1F7A8C] to-[#022B3A] rounded-t-xl flex items-center justify-center absolute inset-0" style={{display: 'none'}}>
+                      <BookOpen className="w-16 h-16 text-white" />
+                    </div>
                   </div>
                   <Badge
                     variant="success"
