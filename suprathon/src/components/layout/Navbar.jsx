@@ -20,64 +20,95 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
   };
 
   return (
-    <nav className="bg-white shadow-lg border-b-2 border-[#E1E5F2] sticky top-0 z-50">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-18 lg:h-20">
-          {/* Left Section - Logo and Navigation */}
-          <div className="flex items-center space-x-4 sm:space-x-6 lg:space-x-8">
-            {/* Logo */}
-            <div className="flex items-center cursor-pointer" onClick={() => setCurrentPage('home')}>
-              <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#022B3A] whitespace-nowrap">
-                EduConnect Pro
+    <nav className="bg-white shadow-lg border-b-2 border-[#E1E5F2] sticky top-0 z-50 w-full overflow-x-hidden">
+      <div className="w-full max-w-7xl mx-auto px-3 sm:px-4">
+        <div className="flex items-center justify-between h-14 sm:h-16">
+          {/* Mobile Menu Button */}
+          <div className="flex items-center md:hidden">
+            <button
+              onClick={toggleMobileMenu}
+              className="p-2 rounded-lg text-[#022B3A] hover:bg-[#E1E5F2] transition-colors"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+
+          {/* Logo */}
+          <div className="flex items-center cursor-pointer flex-1 md:flex-none justify-center md:justify-start" onClick={() => setCurrentPage('home')}>
+            <div className="text-lg sm:text-xl md:text-2xl font-bold text-[#022B3A] truncate">
+              EduConnect Pro
+            </div>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1 lg:space-x-2 flex-1 justify-center">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setCurrentPage(item.id)}
+                  className={cn(
+                    "flex items-center px-2 lg:px-3 py-2 rounded-lg text-xs lg:text-sm font-medium transition-colors duration-200 whitespace-nowrap",
+                    currentPage === item.id
+                      ? "bg-[#1F7A8C] text-white"
+                      : "text-[#022B3A] hover:bg-[#E1E5F2] hover:text-[#1F7A8C]"
+                  )}
+                >
+                  <Icon className="w-3 h-3 lg:w-4 lg:h-4 mr-1 lg:mr-2" />
+                  <span className="hidden lg:inline">{item.label}</span>
+                  <span className="lg:hidden text-xs">{item.label.charAt(0)}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right Section */}
+          <div className="flex items-center space-x-1 sm:space-x-2">
+            {/* Search - Hidden on small screens */}
+            <div className="hidden lg:flex relative">
+              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-[#1F7A8C] w-4 h-4" />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="pl-8 pr-3 py-2 border border-[#BFDBF7] rounded-lg focus:border-[#1F7A8C] focus:outline-none transition-colors text-sm w-32"
+              />
+            </div>
+            
+            {/* Notifications - Hidden on mobile */}
+            <button className="hidden sm:flex relative p-2 text-[#022B3A] hover:bg-[#E1E5F2] rounded-lg transition-colors">
+              <Bell className="w-4 h-4 lg:w-5 lg:h-5" />
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 lg:w-5 lg:h-5 flex items-center justify-center text-[10px]">
+                3
+              </span>
+            </button>
+
+            {/* Login Button */}
+            {user ? (
+              <div className="flex items-center space-x-1">
+                <div className="w-6 h-6 lg:w-8 lg:h-8 bg-[#1F7A8C] rounded-full flex items-center justify-center">
+                  <User className="w-3 h-3 lg:w-4 lg:h-4 text-white" />
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setCurrentPage('profile')}
+                  className="text-[#022B3A] text-xs lg:text-sm px-2 lg:px-3"
+                >
+                  Profile
+                </Button>
               </div>
-            </div>
-
-            {/* Desktop Navigation - Full */}
-            <div className="hidden xl:flex items-center space-x-2">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => setCurrentPage(item.id)}
-                    className={cn(
-                      "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200",
-                      currentPage === item.id
-                        ? "bg-[#1F7A8C] text-white"
-                        : "text-[#022B3A] hover:bg-[#E1E5F2] hover:text-[#1F7A8C]"
-                    )}
-                  >
-                    <Icon className="w-4 h-4 mr-2" />
-                    {item.label}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Large Desktop Navigation - Compact */}
-            <div className="hidden lg:flex xl:hidden items-center space-x-1">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => setCurrentPage(item.id)}
-                    className={cn(
-                      "flex items-center px-3 py-2 rounded-lg text-xs font-medium transition-colors duration-200",
-                      currentPage === item.id
-                        ? "bg-[#1F7A8C] text-white"
-                        : "text-[#022B3A] hover:bg-[#E1E5F2] hover:text-[#1F7A8C]"
-                    )}
-                    title={item.label}
-                  >
-                    <Icon className="w-4 h-4 mr-1" />
-                    <span className="hidden lg:inline text-xs">{item.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Tablet Navigation - Icons Only */}
+            ) : (
+              <button
+                onClick={() => setCurrentPage('login')}
+                className="flex items-center px-3 lg:px-4 py-2 rounded-lg text-xs lg:text-sm font-medium transition-colors duration-200 text-white bg-[#1F7A8C] hover:bg-[#022B3A] whitespace-nowrap"
+              >
+                <User className="w-3 h-3 lg:w-4 lg:h-4 mr-1" />
+                Login
+              </button>
+            )}
+          </div>
+        </div>
             <div className="hidden md:flex lg:hidden items-center space-x-1">
               {navItems.slice(0, 4).map((item) => {
                 const Icon = item.icon;

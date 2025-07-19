@@ -1,6 +1,6 @@
 import './App.css'
 import { useState } from 'react'
-import Navbar from './components/layout/Navbar'
+import Navbar from './components/layout/Navbar-New'
 import LandingPage from './components/pages/LandingPage'
 import CoursesListing from './components/pages/CoursesListing'
 import EventsListing from './components/pages/EventsListing'
