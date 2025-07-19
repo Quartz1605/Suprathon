@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, LogIn } from 'lucide-react';
 
-const UserLogin = ({ setCurrentPage }) => {
+const UserLogin = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -220,7 +222,7 @@ const UserLogin = ({ setCurrentPage }) => {
                 Don't have an account?{' '}
                 <button 
                   type="button"
-                  onClick={() => setCurrentPage('signup')}
+                  onClick={() => navigate('/signup')}
                   className="font-medium hover:underline text-[#1F7A8C] hover:text-[#022B3A] cursor-pointer"
                 >
                   Sign up here

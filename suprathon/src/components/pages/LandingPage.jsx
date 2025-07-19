@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { BookOpen, Calendar, Users, Star, TrendingUp, Award, ChevronRight, Clock, MapPin, User } from 'lucide-react';
 import Button from '../ui/Button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/Card';
 import Badge from '../ui/Badge';
 
-const LandingPage = ({ setCurrentPage }) => {
+const LandingPage = () => {
   const featuredCourses = [
     {
       id: 1,
@@ -101,22 +102,24 @@ const LandingPage = ({ setCurrentPage }) => {
               Connect with top institutes, discover amazing courses, attend live events, and accelerate your learning journey with personalized guidance.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button
-                size="lg"
-                onClick={() => setCurrentPage('courses')}
-                className="text-lg px-8 py-4 group"
-              >
-                Explore Courses
-                <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => setCurrentPage('events')}
-                className="text-lg px-8 py-4"
-              >
-                View Events
-              </Button>
+              <Link to="/courses">
+                <Button
+                  size="lg"
+                  className="text-lg px-8 py-4 group"
+                >
+                  Explore Courses
+                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+              <Link to="/events">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="text-lg px-8 py-4"
+                >
+                  View Events
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -242,27 +245,29 @@ const LandingPage = ({ setCurrentPage }) => {
                     <div className="text-2xl font-bold text-[#022B3A]">{course.price}</div>
                   </div>
                   
-                  <Button
-                    className="w-full group"
-                    onClick={() => setCurrentPage('course-details')}
-                  >
-                    Enroll Now
-                    <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to="/course-details">
+                    <Button
+                      className="w-full group"
+                    >
+                      Enroll Now
+                      <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
           </div>
 
           <div className="text-center mt-12">
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => setCurrentPage('courses')}
-              className="px-8"
-            >
-              View All Courses
-            </Button>
+            <Link to="/courses">
+              <Button
+                variant="outline"
+                size="lg"
+                className="px-8"
+              >
+                View All Courses
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -314,27 +319,29 @@ const LandingPage = ({ setCurrentPage }) => {
                     </div>
                   </div>
                   
-                  <Button
-                    variant={event.isLive ? "default" : "outline"}
-                    className="w-full"
-                    onClick={() => setCurrentPage('event-details')}
-                  >
-                    {event.isLive ? "Join Now" : "Register"}
-                  </Button>
+                  <Link to="/event-details">
+                    <Button
+                      variant={event.isLive ? "default" : "outline"}
+                      className="w-full"
+                    >
+                      {event.isLive ? "Join Now" : "Register"}
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
           </div>
 
           <div className="text-center mt-12">
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => setCurrentPage('events')}
-              className="px-8"
-            >
-              View All Events
-            </Button>
+            <Link to="/events">
+              <Button
+                variant="outline"
+                size="lg"
+                className="px-8"
+              >
+                View All Events
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -349,22 +356,24 @@ const LandingPage = ({ setCurrentPage }) => {
             Join thousands of students who are already advancing their careers with our platform.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-[#022B3A] px-8"
-              onClick={() => setCurrentPage('signup')}
-            >
-              Get Started Today
-            </Button>
-            <Button
-              variant="ghost"
-              size="lg"
-              className="text-white hover:bg-white/10 px-8"
-              onClick={() => setCurrentPage('institutes')}
-            >
-              For Institutes
-            </Button>
+            <Link to="/signup">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white text-white hover:bg-white hover:text-[#022B3A] px-8"
+              >
+                Get Started Today
+              </Button>
+            </Link>
+            <Link to="/institutes">
+              <Button
+                variant="ghost"
+                size="lg"
+                className="text-white hover:bg-white/10 px-8"
+              >
+                For Institutes
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

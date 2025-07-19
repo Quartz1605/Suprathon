@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, User, BookOpen, Calendar, MessageCircle, Bot, Search, Bell, Home, Building, Settings } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
-const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
+const Navbar = ({ user = null }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   const navItems = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'courses', label: 'Courses', icon: BookOpen },
-    { id: 'events', label: 'Events', icon: Calendar },
-    { id: 'institutes', label: 'Institutes', icon: Building },
-    { id: 'discussion', label: 'Discussion', icon: MessageCircle },
-    { id: 'chatbot', label: 'AI Help', icon: Bot },
+    { id: '/', label: 'Home', icon: Home },
+    { id: '/courses', label: 'Courses', icon: BookOpen },
+    { id: '/events', label: 'Events', icon: Calendar },
+    { id: '/institutes', label: 'Institutes', icon: Building },
+    { id: '/discussion', label: 'Discussion', icon: MessageCircle },
+    { id: '/chatbot', label: 'AI Help', icon: Bot },
   ];
 
   // Add admin dashboard for admin users
   const allNavItems = user?.isAdmin 
-    ? [...navItems, { id: 'admin-dashboard', label: 'Admin', icon: Settings }]
+    ? [...navItems, { id: '/admin-dashboard', label: 'Admin', icon: Settings }]
     : navItems;
 
   const toggleMobileMenu = () => {
@@ -39,23 +41,24 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
           </div>
 
           {/* Logo */}
-          <div className="flex items-center cursor-pointer flex-shrink-0" onClick={() => setCurrentPage('home')}>
+          <Link to="/" className="flex items-center cursor-pointer flex-shrink-0">
             <div className="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold text-[#022B3A] whitespace-nowrap">
               EduConnect Pro
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation - Show on medium screens and above */}
           <div className="hidden md:flex items-center space-x-1 lg:space-x-2 flex-1 justify-center">
             {allNavItems.map((item) => {
               const Icon = item.icon;
+              const isActive = location.pathname === item.id;
               return (
-                <button
+                <Link
                   key={item.id}
-                  onClick={() => setCurrentPage(item.id)}
+                  to={item.id}
                   className={cn(
                     "flex items-center px-2 lg:px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 whitespace-nowrap",
-                    currentPage === item.id
+                    isActive
                       ? "bg-[#1F7A8C] text-white shadow-md"
                       : "text-[#022B3A] hover:bg-[#E1E5F2] hover:text-[#1F7A8C]"
                   )}
@@ -63,7 +66,7 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
                 >
                   <Icon className="w-4 h-4" />
                   <span className="ml-2 hidden lg:inline text-sm">{item.label}</span>
-                </button>
+                </Link>
               );
             })}
           </div>
@@ -96,21 +99,21 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
                 <div className="w-8 h-8 bg-[#1F7A8C] rounded-full flex items-center justify-center flex-shrink-0">
                   <User className="w-4 h-4 text-white" />
                 </div>
-                <button
-                  onClick={() => setCurrentPage('profile')}
+                <Link
+                  to="/profile"
                   className="hidden md:block text-[#022B3A] text-sm px-3 py-2 hover:bg-[#E1E5F2] rounded-lg transition-colors font-medium whitespace-nowrap"
                 >
                   Profile
-                </button>
+                </Link>
               </div>
             ) : (
-              <button
-                onClick={() => setCurrentPage('login')}
+              <Link
+                to="/login"
                 className="flex items-center px-3 lg:px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-white bg-[#1F7A8C] hover:bg-[#022B3A] whitespace-nowrap shadow-md flex-shrink-0"
               >
                 <User className="w-4 h-4 mr-1 lg:mr-2" />
                 <span>Login</span>
-              </button>
+              </Link>
             )}
           </div>
         </div>
@@ -122,23 +125,22 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
             <div className="space-y-1 mb-4">
               {allNavItems.map((item) => {
                 const Icon = item.icon;
+                const isActive = location.pathname === item.id;
                 return (
-                  <button
+                  <Link
                     key={item.id}
-                    onClick={() => {
-                      setCurrentPage(item.id);
-                      setIsMobileMenuOpen(false);
-                    }}
+                    to={item.id}
+                    onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       "flex items-center w-full px-4 py-3 rounded-lg text-left transition-colors text-sm font-medium",
-                      currentPage === item.id
+                      isActive
                         ? "bg-[#1F7A8C] text-white shadow-md"
                         : "text-[#022B3A] hover:bg-[#E1E5F2]"
                     )}
                   >
                     <Icon className="w-5 h-5 mr-3" />
                     {item.label}
-                  </button>
+                  </Link>
                 );
               })}
             </div>
@@ -155,29 +157,25 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
             {/* Auth Section */}
             <div className="pt-4 border-t border-[#E1E5F2]">
               {!user ? (
-                <button
-                  onClick={() => {
-                    setCurrentPage('login');
-                    setIsMobileMenuOpen(false);
-                  }}
+                <Link
+                  to="/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center justify-center w-full px-4 py-3 rounded-lg bg-[#1F7A8C] text-white font-medium text-sm shadow-md"
                 >
                   <User className="w-5 h-5 mr-3" />
                   Login
-                </button>
+                </Link>
               ) : (
-                <button
-                  onClick={() => {
-                    setCurrentPage('profile');
-                    setIsMobileMenuOpen(false);
-                  }}
+                <Link
+                  to="/profile"
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center w-full px-4 py-3 rounded-lg text-[#022B3A] hover:bg-[#E1E5F2] font-medium text-sm"
                 >
                   <div className="w-6 h-6 bg-[#1F7A8C] rounded-full flex items-center justify-center mr-3">
                     <User className="w-3 h-3 text-white" />
                   </div>
                   View Profile
-                </button>
+                </Link>
               )}
             </div>
           </div>

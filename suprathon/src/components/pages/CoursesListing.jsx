@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Search, Filter, BookOpen, Clock, Users, Star, TrendingUp, User, ChevronRight } from 'lucide-react';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/Card';
 import Badge from '../ui/Badge';
 
-const CoursesListing = ({ setCurrentPage }) => {
+const CoursesListing = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState('All');
@@ -342,14 +343,15 @@ const CoursesListing = ({ setCurrentPage }) => {
                         <div className="text-xs text-gray-500 line-through">{course.originalPrice}</div>
                       )}
                     </div>
-                    <Button
-                      size="sm"
-                      className="group text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
-                      onClick={() => setCurrentPage('course-details')}
-                    >
-                      View
-                      <ChevronRight className="ml-1 w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    <Link to="/course-details">
+                      <Button
+                        size="sm"
+                        className="group text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
+                      >
+                        View
+                        <ChevronRight className="ml-1 w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>

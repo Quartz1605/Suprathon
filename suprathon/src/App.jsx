@@ -1,4 +1,5 @@
 import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
 import Navbar from './components/layout/Navbar-New'
 import LandingPage from './components/pages/LandingPage'
@@ -20,7 +21,6 @@ import UserSignup from './User-Signup'
 import UserLogin from './User-Login'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home')
   // Temporarily set user as logged in admin to test admin dashboard
   const [user, setUser] = useState({
     id: 1,
@@ -30,60 +30,50 @@ function App() {
     isAdmin: true
   })
 
-  const renderPage = () => {
-    switch(currentPage) {
-      case 'home':
-        return <LandingPage setCurrentPage={setCurrentPage} />
-      case 'courses':
-        return <CoursesListing setCurrentPage={setCurrentPage} />
-      case 'events':
-        return <EventsListing setCurrentPage={setCurrentPage} />
-      case 'institutes':
-        return <InstitutesListing setCurrentPage={setCurrentPage} />
-      case 'discussion':
-        return <Discussion setCurrentPage={setCurrentPage} />
-      case 'chatbot':
-        return <Chatbot setCurrentPage={setCurrentPage} />
-      case 'profile':
-        return <UserProfile setCurrentPage={setCurrentPage} />
-      case 'signup':
-        return (
-          <div className="min-h-screen bg-gradient-to-br from-[#FFFFFF] to-[#E1E5F2] flex items-center justify-center">
-            <UserSignup />
-          </div>
-        )
-      case 'login':
-        return (
-          <div className="min-h-screen bg-gradient-to-br from-[#FFFFFF] to-[#E1E5F2] flex items-center justify-center">
-            <UserLogin setCurrentPage={setCurrentPage} />
-          </div>
-        )
-      case 'course-details':
-        return <CourseDetails setCurrentPage={setCurrentPage} />
-      case 'event-details':
-        return <EventDetails setCurrentPage={setCurrentPage} />
-      case 'institute-profile':
-        return <InstituteProfile setCurrentPage={setCurrentPage} />
-      case 'course-registration':
-        return <CourseRegistration setCurrentPage={setCurrentPage} />
-      case 'event-registration':
-        return <EventRegistration setCurrentPage={setCurrentPage} />
-      case 'organizer':
-        return <AdminPanel setCurrentPage={setCurrentPage} />
-      case 'admin-dashboard':
-        return <AdminDashboard setCurrentPage={setCurrentPage} />
-      case 'chart-demo':
-        return <ChartDemo setCurrentPage={setCurrentPage} />
-      default:
-        return <LandingPage setCurrentPage={setCurrentPage} />
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} user={user} />
-      {renderPage()}
-    </div>
+    <Router>
+      <div className="min-h-screen bg-white">
+        <Navbar user={user} />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/courses" element={<CoursesListing />} />
+          <Route path="/events" element={<EventsListing />} />
+          <Route path="/institutes" element={<InstitutesListing />} />
+          <Route path="/discussion" element={<Discussion />} />
+          <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route 
+            path="/signup" 
+            element={
+              <div className="min-h-screen bg-gradient-to-br from-[#FFFFFF] to-[#E1E5F2] flex items-center justify-center">
+                <UserSignup />
+              </div>
+            } 
+          />
+          <Route 
+            path="/login" 
+            element={
+              <div className="min-h-screen bg-gradient-to-br from-[#FFFFFF] to-[#E1E5F2] flex items-center justify-center">
+                <UserLogin />
+              </div>
+            } 
+          />
+          <Route path="/course-details" element={<CourseDetails />} />
+          <Route path="/course-details/:id" element={<CourseDetails />} />
+          <Route path="/event-details" element={<EventDetails />} />
+          <Route path="/event-details/:id" element={<EventDetails />} />
+          <Route path="/institute-profile" element={<InstituteProfile />} />
+          <Route path="/institute-profile/:id" element={<InstituteProfile />} />
+          <Route path="/course-registration" element={<CourseRegistration />} />
+          <Route path="/course-registration/:id" element={<CourseRegistration />} />
+          <Route path="/event-registration" element={<EventRegistration />} />
+          <Route path="/event-registration/:id" element={<EventRegistration />} />
+          <Route path="/organizer" element={<AdminPanel />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/chart-demo" element={<ChartDemo />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 
