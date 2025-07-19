@@ -28,7 +28,8 @@ EduConnect Pro is a comprehensive educational platform that connects students, e
 - **User Signup** (`/signup`) - User registration
 
 ### 5. Admin Pages
-- **Admin Panel** (`/organizer`) - Institute/organizer dashboard
+- **Admin Panel** (`/organizer`) - Institute/organizer dashboard (existing)
+- **Admin Dashboard** (`/admin-dashboard`) - Comprehensive admin analytics and management
 
 ## Page Navigation Flow
 
@@ -171,6 +172,36 @@ Contact Institute ← View Courses/Events ← Registration
 - Certificates and achievements
 - Account settings and preferences
 
+### 6. Admin Dashboard Page
+**File:** `src/components/pages/AdminDashboard.jsx`
+
+**Features:**
+- Comprehensive analytics dashboard with real-time insights
+- Multi-tab interface (Overview, Event Management, Analytics, Institutes)
+- Event approval workflow (approve/reject pending events)
+- Live event monitoring with registration tracking
+- Revenue and growth analytics
+- Institute performance management
+- User activity monitoring
+- Quick action buttons for common admin tasks
+
+**Responsive Design:**
+- Mobile-optimized admin interface
+- Touch-friendly controls for tablets
+- Responsive charts and analytics displays
+- Adaptive layout for different screen sizes
+
+**Database Integration:**
+- Real-time event management linked to EventSchema
+- User analytics from UserSchema
+- Institute performance from InstituteSchema
+- Registration tracking from RegistrationSchema
+
+**Admin Access:**
+- Only visible to users with `isAdmin: true` flag
+- Secure admin-only navigation
+- Role-based feature access
+
 ## Database Schema Integration
 
 ### Course Registration Data Flow
@@ -258,7 +289,72 @@ setCurrentPage('institute-profile') // Institute profile
 setCurrentPage('course-registration') // Course registration
 setCurrentPage('event-registration')  // Event registration
 setCurrentPage('profile')           // User profile
+setCurrentPage('admin-dashboard')   // Admin dashboard (admin only)
 ```
+
+### Admin Dashboard Access
+**For Admin Users:**
+1. **Desktop Navigation:** Look for the "Admin" button with gear icon in the main navigation
+2. **Mobile Navigation:** Access through the hamburger menu → "Admin" option
+3. **Direct Navigation:** Use `setCurrentPage('admin-dashboard')`
+
+**Admin User Setup:**
+```javascript
+// In App.jsx, set user as admin
+const [user, setUser] = useState({
+  id: 1,
+  firstName: 'Admin',
+  lastName: 'User',
+  email: 'admin@educonnect.com',
+  isAdmin: true  // This flag enables admin features
+})
+```
+
+## Charts and Analytics
+
+### Available Chart Types
+Your platform now includes comprehensive analytics with beautiful, responsive charts powered by **Recharts** library:
+
+#### 📊 Chart Components Available:
+1. **LiveActivityChart** - Real-time platform activity (Area Chart)
+2. **PerformanceRadarChart** - Performance metrics across multiple dimensions
+3. **RevenueChart** - Revenue trends over time (Stacked Area Chart)
+4. **UserGrowthChart** - User acquisition and growth patterns
+
+#### 🎯 Chart Locations:
+- **Admin Dashboard Overview Tab**: All 4 main charts for quick insights
+- **Admin Dashboard Analytics Tab**: Enhanced detailed analytics with additional charts
+- **Chart Demo Page** (`/chart-demo`): Complete showcase of all available chart types
+
+#### 📈 Supported Chart Types:
+- **Area Charts**: Perfect for trends over time with filled areas
+- **Line Charts**: Clean multi-series comparisons
+- **Bar Charts**: Category comparisons and grouped data
+- **Radar Charts**: Performance across multiple dimensions
+- **Pie Charts**: Proportional data visualization
+- **Composed Charts**: Combine different chart types (bar + line)
+
+#### 💻 Quick Access:
+```javascript
+// Navigate to chart demo
+setCurrentPage('chart-demo')
+
+// Navigate to admin dashboard
+setCurrentPage('admin-dashboard')
+```
+
+#### 🎨 Chart Features:
+- **Responsive Design**: Auto-adapts to all screen sizes
+- **Interactive Tooltips**: Hover for detailed information  
+- **Custom Styling**: Matches your platform's color scheme
+- **Animation Effects**: Smooth transitions and loading states
+- **Mobile Optimized**: Touch-friendly on tablets and phones
+
+#### 📱 Mobile Optimization:
+- Responsive containers that adapt to screen size
+- Touch-friendly interactive elements
+- Optimized font sizes for mobile devices
+- Horizontal layouts for better mobile viewing
 
 ### Cross-Page Data Flow
 - Course/Event IDs passed through URL params or state

@@ -24,7 +24,7 @@ const EventDetails = ({ setCurrentPage }) => {
     eventTypeMode: "Hybrid",
     eventTypeMember: "Team",
     price: 500,
-    prizes: 100000,
+    prizePool: 100000,
     endDate: "2025-03-15",
     startDate: "2025-03-10",
     location: "Mumbai, India",
@@ -209,7 +209,7 @@ const EventDetails = ({ setCurrentPage }) => {
                   <Trophy className="w-5 h-5 text-[#1F7A8C] mr-2" />
                   <div>
                     <p className="text-sm text-gray-600">Prize Pool</p>
-                    <p className="font-semibold text-[#022B3A]">₹{event.prizes.toLocaleString()}</p>
+                    <p className="font-semibold text-[#022B3A]">₹{event.prizePool.toLocaleString()}</p>
                   </div>
                 </div>
               </Card>

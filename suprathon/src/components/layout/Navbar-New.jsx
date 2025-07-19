@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, User, BookOpen, Calendar, MessageCircle, Bot, Search, Bell, Home, Building } from 'lucide-react';
+import { Menu, X, User, BookOpen, Calendar, MessageCircle, Bot, Search, Bell, Home, Building, Settings } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
@@ -13,6 +13,11 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
     { id: 'discussion', label: 'Discussion', icon: MessageCircle },
     { id: 'chatbot', label: 'AI Help', icon: Bot },
   ];
+
+  // Add admin dashboard for admin users
+  const allNavItems = user?.isAdmin 
+    ? [...navItems, { id: 'admin-dashboard', label: 'Admin', icon: Settings }]
+    : navItems;
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -42,7 +47,7 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
 
           {/* Desktop Navigation - Show on medium screens and above */}
           <div className="hidden md:flex items-center space-x-1 lg:space-x-2 flex-1 justify-center">
-            {navItems.map((item) => {
+            {allNavItems.map((item) => {
               const Icon = item.icon;
               return (
                 <button
@@ -115,7 +120,7 @@ const Navbar = ({ currentPage, setCurrentPage, user = null }) => {
           <div className="md:hidden border-t border-[#E1E5F2] py-4 px-4 bg-white">
             {/* Navigation Items */}
             <div className="space-y-1 mb-4">
-              {navItems.map((item) => {
+              {allNavItems.map((item) => {
                 const Icon = item.icon;
                 return (
                   <button

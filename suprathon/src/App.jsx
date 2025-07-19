@@ -13,18 +13,21 @@ import CourseRegistration from './components/pages/CourseRegistration'
 import EventRegistration from './components/pages/EventRegistration'
 import Chatbot from './components/pages/Chatbot'
 import AdminPanel from './components/pages/AdminPanel'
+import AdminDashboard from './components/pages/AdminDashboard'
+import ChartDemo from './components/pages/ChartDemo'
 import Discussion from './components/pages/Discussion'
 import UserSignup from './User-Signup'
 import UserLogin from './User-Login'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
-  // Temporarily set user as logged in to test profile page
+  // Temporarily set user as logged in admin to test admin dashboard
   const [user, setUser] = useState({
     id: 1,
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com'
+    firstName: 'Admin',
+    lastName: 'User',
+    email: 'admin@educonnect.com',
+    isAdmin: true
   })
 
   const renderPage = () => {
@@ -67,6 +70,10 @@ function App() {
         return <EventRegistration setCurrentPage={setCurrentPage} />
       case 'organizer':
         return <AdminPanel setCurrentPage={setCurrentPage} />
+      case 'admin-dashboard':
+        return <AdminDashboard setCurrentPage={setCurrentPage} />
+      case 'chart-demo':
+        return <ChartDemo setCurrentPage={setCurrentPage} />
       default:
         return <LandingPage setCurrentPage={setCurrentPage} />
     }
