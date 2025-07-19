@@ -13,6 +13,7 @@ import { DashboardRoutes } from "./dashboard/dashboardRoutes.js"
 import { RegistrationRoutes } from "./registrations/registrationRoutes.js"
 import { UserMiddleware } from "./middlewares/UserMiddleware.js"
 import { ChatbotRoutes } from "./chatbot/ChatbotRoutes.js"
+import { pdFGenRoutes } from "./pdfGenerator/pdfGeneratorRoutes.js"
 
 dotenv.config()
 
@@ -54,7 +55,12 @@ app.use("/api/v1/dashboard", UserMiddleware, DashboardRoutes)
 
 
 // Chatbot routes
-app.use("/api/v1/chat",ChatbotRoutes)
+app.use("/api/v1/chat",ChatbotRoutes) //Some DB errors need to be resolved.
+
+
+//Certificate generator routes.
+
+app.use("/api/v1/certificate",UserMiddleware,pdFGenRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:3000`)
@@ -63,7 +69,8 @@ app.listen(process.env.PORT, () => {
 
 
 
-
+//Certificate Route - http://localhost:3000/api/v1/certificate/generatePdf
+//ChatBot Route = http://localhost:3000/api/v1/chat/chatbot
 
 
 

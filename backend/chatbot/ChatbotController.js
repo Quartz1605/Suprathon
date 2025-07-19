@@ -55,7 +55,7 @@ const ChatbotController = async (req,res) => {
       reply = `Found ${courses.length} relevant courses: ${courses
         .map(c => `${c.Title} by ${c.CreatorName} `).join(', ')}. Would you like more details on any of these?`;
       } else {
-      reply = `No courses found for "${keywords.join(' or ')}". Try another category or browse our full course catalog!`;
+      reply = `No courses or events found for "${keywords.join(' or ')}". Try another category or browse our full course catalog!`;
     }
     } else {
     reply = "I can help you find courses. Try asking something like 'Machine Learning courses' or 'Events related to Machine Learning.";
