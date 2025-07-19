@@ -6,7 +6,11 @@ import CoursesListing from './components/pages/CoursesListing'
 import EventsListing from './components/pages/EventsListing'
 import UserProfile from './components/pages/UserProfile'
 import CourseDetails from './components/pages/CourseDetails'
+import EventDetails from './components/pages/EventDetails'
 import InstitutesListing from './components/pages/InstitutesListing'
+import InstituteProfile from './components/pages/InstituteProfile'
+import CourseRegistration from './components/pages/CourseRegistration'
+import EventRegistration from './components/pages/EventRegistration'
 import Chatbot from './components/pages/Chatbot'
 import AdminPanel from './components/pages/AdminPanel'
 import Discussion from './components/pages/Discussion'
@@ -15,7 +19,13 @@ import UserLogin from './User-Login'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
-  const [user, setUser] = useState(null) // You can set user data here when logged in
+  // Temporarily set user as logged in to test profile page
+  const [user, setUser] = useState({
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@example.com'
+  })
 
   const renderPage = () => {
     switch(currentPage) {
@@ -48,9 +58,13 @@ function App() {
       case 'course-details':
         return <CourseDetails setCurrentPage={setCurrentPage} />
       case 'event-details':
-        return <div className="min-h-screen flex items-center justify-center">
-          <h1 className="text-3xl font-bold text-[#022B3A]">Event Details Page Coming Soon</h1>
-        </div>
+        return <EventDetails setCurrentPage={setCurrentPage} />
+      case 'institute-profile':
+        return <InstituteProfile setCurrentPage={setCurrentPage} />
+      case 'course-registration':
+        return <CourseRegistration setCurrentPage={setCurrentPage} />
+      case 'event-registration':
+        return <EventRegistration setCurrentPage={setCurrentPage} />
       case 'organizer':
         return <AdminPanel setCurrentPage={setCurrentPage} />
       default:
