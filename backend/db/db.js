@@ -100,8 +100,18 @@ const CourseSchema = new Schema({    // Registration count pending
     type:String,
   },
 
+  Desc:{
+    type:String,
+    default:""
+  },
+
   TotalHours:{
     type:Number
+  },
+
+  registeredCount: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -115,6 +125,11 @@ const EventSchema = new Schema({    // Registration count pending
   shortDesc:{
     type:String,
     required:[true, "Event short desc is required"]
+  },
+
+  Desc:{
+    type:String,
+    default:""
   },
 
   Creator:{
@@ -150,13 +165,22 @@ const EventSchema = new Schema({    // Registration count pending
   Prizes:{
     type:Number,
     required:[true, "Event Prizes are required"]
+  },
+
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+
+  registeredCount: {
+    type: Number,
+    default: 0
   }
 })
 
 const BookmarkSchema = new mongoose.Schema({
-  userId: {
-    type: ObjectId,
-    ref: 'UserModel',
+  emailId: {
+    type: String,
     required: true,
   },
   itemId: {
@@ -167,11 +191,7 @@ const BookmarkSchema = new mongoose.Schema({
     type: String,
     enum: ['event', 'course'],
     required: true,
-  },
-  addedAt: {
-    type: Date,
-    default: Date.now,
-  },
+  }
 });
 const RegistrationSchema = new Schema({
 
@@ -201,6 +221,77 @@ const RegistrationSchema = new Schema({
 
 })
 
+const ProfileSchema = new mongoose.Schema({
+    emailId: {
+      type: String,
+      required: true,
+      unique: true, // One profile per email
+    },
+    about: {
+      type: String,
+      default: "",
+    },
+    skills: {
+      type: [String],
+      default: [],
+    },
+    college: {
+      type: String,
+      default: "",
+    },
+    education: {
+      type: String,
+      default: "",
+    },
+    socialLinks: {
+      linkedin: { type: String, default: "" },
+      github: { type: String, default: "" },
+      twitter: { type: String, default: "" },
+      portfolio: { type: String, default: "" },
+    },
+    // certificates: [
+    //   {
+    //     title: String,
+    //     issuedBy: String,
+    //     date: Date,
+    //     courseOrEvent: String,
+    //     fileUrl: String, // Optional if you want to upload certificates
+    //   },
+    // ],
+});
+
+const ReviewSchema = new Schema({
+
+  userEmail : {
+    type : String,
+    required : [true,"User Email is required !"],
+  },
+
+  eventCourseId : {
+    type : ObjectId,
+    required : [true,"Event Id is required !"],
+    unique : true
+  },
+
+  type : {
+    type : String,
+    enum : ["Event","Course"],
+    required : [true,"Event type is mandatory."]
+  },
+
+  review : {
+    type : String,
+    required : [true,"Review is mandatory."]
+  },
+
+  rating : {
+    type : Number,
+    enum : [1,2,3,4,5],
+    default : 5
+  }
+
+})
+
 
 const CourseModel = mongoose.model("Courses",CourseSchema)
 
@@ -212,7 +303,11 @@ const EventModel = mongoose.model("Events", EventSchema)
 
 const BookmarkModel = mongoose.model("Bookmarks", BookmarkSchema)
 
-export {UserModel,InstituteModel,CourseModel, EventModel, BookmarkModel}
+
 const RegistrationModel = mongoose.model("Registrations",RegistrationSchema)
 
-export {UserModel,InstituteModel,CourseModel, EventModel,RegistrationModel}
+const ProfileModel = mongoose.model("Profile", ProfileSchema)
+
+const ReviewModel = mongoose.model("Reviews",ReviewSchema)
+
+export {UserModel,InstituteModel,CourseModel, EventModel,RegistrationModel, BookmarkModel, ProfileModel,ReviewModel}

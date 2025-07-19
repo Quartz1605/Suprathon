@@ -4,6 +4,7 @@ export const addEventController = async(req, res) =>{
     const {
         Title,
         shortDesc,
+        Desc,
         Creator,
         Category,
         endDate,

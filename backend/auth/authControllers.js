@@ -1,4 +1,5 @@
 import { UserModel } from "../db/db.js";
+import { ProfileModel } from "../db/db.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
 
@@ -33,7 +34,22 @@ const userSignupController = async(req,res) => {
 
     const user = await UserModel.create(req.body)
 
-    if(user){
+    if (user) {
+      // 🌟 Create a default profile
+      await ProfileModel.create({
+        emailId: email,
+        about: "",
+        skills: [],
+        college: "",
+        education: "",
+        socialLinks: {
+          linkedin: "",
+          github: "",
+          twitter: "",
+          portfolio: "",
+        },
+        // certificates: []
+      });
       
       res.cookie("jwt",createToken(email),{
         maxAge,
