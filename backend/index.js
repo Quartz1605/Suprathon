@@ -8,6 +8,8 @@ import { CourseRoutes } from "./courses/courseRoutes.js"
 import { InstituteRoutes } from "./institute/instituteRoutes.js"
 import { EventRoutes } from "./events/eventRoutes.js"
 import { CourseMiddleware } from "./middlewares/CourseMiddleware.js"
+import { BookmarkRoutes } from "./bookmarks/bookmarkRoutes.js"
+import { DashboardRoutes } from "./dashboard/dashboardRoutes.js"
 
 dotenv.config()
 
@@ -30,12 +32,17 @@ app.use("/api/v1/auth",UserRoutes)
 app.use("/api/v1/courses",CourseMiddleware ,CourseRoutes)
 
 
-
 // Institute routes
 app.use("/api/v1/institute/auth",InstituteRoutes)
 
 // Events
-app.use("/events", CourseMiddleware, EventRoutes)   // Event MiddleWare ??
+app.use("/api/v1/events", CourseMiddleware, EventRoutes)   // Event MiddleWare ??
+
+// Bookmarks
+app.use("api/v1/bookmarks", BookmarkRoutes)   // Not Tested Yet. User Middleware ??
+
+// Dashboard
+app.use("api/v1/dashboard", DashboardRoutes)  
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:3000`)
