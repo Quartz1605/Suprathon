@@ -173,6 +173,33 @@ const BookmarkSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+const RegistrationSchema = new Schema({
+
+  eventCourseId : {
+    type : ObjectId,
+    required : [true,"Event Id is required !"],
+    unique : true
+  },
+
+  userEmail : {
+    type : String,
+    required : [true,"User Email is required !"],
+  },
+
+  certificateIssued : {
+    type : Boolean,
+    default : false
+  },
+
+  type : {
+    type : String,
+    enum : ["Event","Course"],
+    required : [true,"Event type is mandatory."]
+  }
+
+  // payemnt Can be added.
+
+})
 
 
 const CourseModel = mongoose.model("Courses",CourseSchema)
@@ -186,3 +213,6 @@ const EventModel = mongoose.model("Events", EventSchema)
 const BookmarkModel = mongoose.model("Bookmarks", BookmarkSchema)
 
 export {UserModel,InstituteModel,CourseModel, EventModel, BookmarkModel}
+const RegistrationModel = mongoose.model("Registrations",RegistrationSchema)
+
+export {UserModel,InstituteModel,CourseModel, EventModel,RegistrationModel}

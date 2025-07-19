@@ -2,7 +2,7 @@ import { UserModel } from "../db/db.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt"
 
-const maxAge = 3*24*60*60*100;
+const maxAge = 20*24*60*60*100;
 
 const createToken = (email) => {
 
