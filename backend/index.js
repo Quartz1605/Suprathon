@@ -6,6 +6,7 @@ import cors from "cors"
 import { UserRoutes } from "./auth/authRoutes.js"
 import { CourseRoutes } from "./courses/courseRoutes.js"
 import { InstituteRoutes } from "./institute/instituteRoutes.js"
+import { EventRoutes } from "./events/eventRoutes.js"
 
 dotenv.config()
 
@@ -33,6 +34,9 @@ app.use("/api/v1/auth",UserRoutes)
 
 // Institute
 app.use("/api/v1/institute/auth",InstituteRoutes)
+
+// Events
+app.use("/events", EventRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:3000`)

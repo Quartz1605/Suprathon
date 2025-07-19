@@ -105,6 +105,52 @@ const CourseSchema = new Schema({
   }
 })
 
+const EventSchema = new Schema({
+  Title : {
+    type:String,
+    required:[true, "Event Title is required"]
+  },
+
+  shortDesc:{
+    type:String,
+    required:[true, "Event short desc is required"]
+  },
+
+  Creator:{
+    type:String,
+    required:[true, "Event creator is required"]
+  },
+
+  Category:{
+    type:String,
+    required:[true, "Event Category is required"]
+  },
+
+  endDate : {
+    type:String,   // Fufuture mein Date Daalna Hai 
+    required:[true, "Event Deadline is required"]
+  },
+
+  eventTypeMode : {  // Online or Offline
+    type:String,
+    required:[true, "Event Mode is required"]
+  },
+
+  eventTypeMember : {   // Solo or Team
+    type:String,
+    required :[true, "Event Member/Solo is required "]
+  },
+
+  Price : {
+    type:Number,
+    required:[true, "Event price is required"]
+  },
+
+  Prizes:{
+    type:Number,
+    required:[true, "Event Prizes are required"]
+  }
+})
 
 
 const CourseModel = mongoose.model("Courses",CourseSchema)
@@ -113,4 +159,6 @@ const UserModel = mongoose.model("Users",UserSchema)
 
 const InstituteModel = mongoose.model("Institutes",InstituteSchema)
 
-export {UserModel,InstituteModel,CourseModel}
+const EventModel = mongoose.model("Events", EventSchema)
+
+export {UserModel,InstituteModel,CourseModel, EventModel}
