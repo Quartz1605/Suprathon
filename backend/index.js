@@ -15,6 +15,7 @@ import { UserMiddleware } from "./middlewares/UserMiddleware.js"
 import { ChatbotRoutes } from "./chatbot/ChatbotRoutes.js"
 import { pdFGenRoutes } from "./pdfGenerator/pdfGeneratorRoutes.js"
 import { ReviewRoutes } from "./reviews/reviewRoutes.js"
+import { upload } from "./middlewares/multerMiddleware.js"
 
 dotenv.config()
 
@@ -41,7 +42,7 @@ app.use("/api/v1/courses",InstituteMiddleware ,CourseRoutes)
 app.use("/api/v1/institute/auth",InstituteRoutes)
 
 // Events
-app.use("/api/v1/events",InstituteMiddleware ,EventRoutes)
+app.use("/api/v1/events",InstituteMiddleware,EventRoutes)
 
 
 //Course & Events Registration routes

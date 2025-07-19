@@ -1,4 +1,5 @@
 import {EventModel} from "../db/db.js";
+import { InstituteModel } from "../db/db.js";
 
 export const addEventController = async(req, res) =>{
     const {
@@ -13,6 +14,9 @@ export const addEventController = async(req, res) =>{
         Price,
         Prizes
     } = req.body
+
+    // const ImageUrl = req.file.path
+    // req.ImageUrl = ImageUrl
 
     if(!Title || !Creator || !Price || !shortDesc || !Category || !endDate || !eventTypeMode || !eventTypeMember || !Prizes){
         return res.status(400).json({"message" : "Necessary details are not provided."})

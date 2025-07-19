@@ -167,16 +167,16 @@ const EventSchema = new Schema({    // Registration count pending
     required:[true, "Event Prizes are required"]
   },
 
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-
   registeredCount: {
     type: Number,
     default: 0
+  },
+
+  ImageUrl : {
+    type : String,
+    default : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6jGXDtpoKU2QoWvZJinXfw7LeRGrzNA_Xmg&s"
   }
-})
+},{timestamps : true})
 
 const BookmarkSchema = new mongoose.Schema({
   emailId: {
@@ -193,6 +193,7 @@ const BookmarkSchema = new mongoose.Schema({
     required: true,
   }
 });
+
 const RegistrationSchema = new Schema({
 
   eventCourseId : {
