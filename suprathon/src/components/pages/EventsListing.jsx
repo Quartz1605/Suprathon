@@ -209,13 +209,13 @@ const EventsListing = () => {
                       <div className="text-sm text-gray-500 line-through">{event.originalPrice}</div>
                     )}
                   </div>
-                  <Link to="/event-details">
+                  <Link to={`/event-registration/${event.id}`}>
                     <Button
                       size="sm"
                       variant={event.isLive ? "default" : "outline"}
                       className="group"
                     >
-                      {event.isLive ? "Join Now" : "View Details"}
+                      {event.isLive ? "Join Now" : "Register"}
                       <ChevronRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>

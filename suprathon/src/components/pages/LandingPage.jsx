@@ -245,7 +245,7 @@ const LandingPage = () => {
                     <div className="text-2xl font-bold text-[#022B3A]">{course.price}</div>
                   </div>
                   
-                  <Link to="/course-details">
+                  <Link to={`/course-registration/${course.id}`}>
                     <Button
                       className="w-full group"
                     >
@@ -319,7 +319,7 @@ const LandingPage = () => {
                     </div>
                   </div>
                   
-                  <Link to="/event-details">
+                  <Link to={`/event-registration/${event.id}`}>
                     <Button
                       variant={event.isLive ? "default" : "outline"}
                       className="w-full"

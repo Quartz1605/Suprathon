@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Users, Trophy, Calendar, MapPin, CreditCard, Shield, CheckCircle, User, Mail, Phone, Star, Clock, Award } from 'lucide-react';
 import Button from '../ui/Button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/Card';
 import Badge from '../ui/Badge';
 
-const EventRegistration = ({ setCurrentPage }) => {
+const EventRegistration = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [teamMembers, setTeamMembers] = useState([{ name: '', email: '', skills: '' }]);
   const [formData, setFormData] = useState({
@@ -625,10 +628,10 @@ const EventRegistration = ({ setCurrentPage }) => {
         </div>
       </div>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Button onClick={() => setCurrentPage('events')}>
+        <Button onClick={() => navigate('/events')}>
           Browse More Events
         </Button>
-        <Button variant="outline" onClick={() => setCurrentPage('profile')}>
+        <Button variant="outline" onClick={() => navigate('/profile')}>
           Go to Profile
         </Button>
       </div>
@@ -641,7 +644,7 @@ const EventRegistration = ({ setCurrentPage }) => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
           <button
-            onClick={() => setCurrentPage('event-details')}
+            onClick={() => navigate(`/event-details/${id}`)}
             className="flex items-center text-[#1F7A8C] hover:text-[#022B3A] transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />

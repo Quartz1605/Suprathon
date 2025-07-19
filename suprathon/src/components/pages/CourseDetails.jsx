@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Play, BookOpen, Clock, Users, Star, Calendar, Award, CheckCircle, Globe, Download, Share2, Heart, User, ChevronRight, ChevronDown } from 'lucide-react';
 import Button from '../ui/Button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/Card';
 import Badge from '../ui/Badge';
 
-const CourseDetails = ({ setCurrentPage }) => {
+const CourseDetails = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedModule, setExpandedModule] = useState(null);
 
@@ -425,7 +428,7 @@ const CourseDetails = ({ setCurrentPage }) => {
       <div className="bg-white border-b border-[#E1E5F2]">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <button
-            onClick={() => setCurrentPage('courses')}
+            onClick={() => navigate('/courses')}
             className="flex items-center gap-2 text-[#1F7A8C] hover:text-[#022B3A] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -548,9 +551,11 @@ const CourseDetails = ({ setCurrentPage }) => {
 
                 {/* CTA Buttons */}
                 <div className="space-y-3 mb-6">
-                  <Button className="w-full" size="lg">
-                    Enroll Now
-                  </Button>
+                  <Link to={`/course-registration/${id || course.id}`}>
+                    <Button className="w-full" size="lg">
+                      Enroll Now
+                    </Button>
+                  </Link>
                   <Button variant="outline" className="w-full">
                     Add to Wishlist
                   </Button>

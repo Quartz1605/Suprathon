@@ -343,12 +343,12 @@ const CoursesListing = () => {
                         <div className="text-xs text-gray-500 line-through">{course.originalPrice}</div>
                       )}
                     </div>
-                    <Link to="/course-details">
+                    <Link to={`/course-registration/${course.id}`}>
                       <Button
                         size="sm"
                         className="group text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
                       >
-                        View
+                        Enroll Now
                         <ChevronRight className="ml-1 w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>

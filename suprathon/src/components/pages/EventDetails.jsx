@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, Users, MapPin, Trophy, Star, Share2, Heart, User, CheckCircle, DollarSign, Globe, Award, Timer } from 'lucide-react';
 import Button from '../ui/Button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/Card';
 import Badge from '../ui/Badge';
 
-const EventDetails = ({ setCurrentPage }) => {
+const EventDetails = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
   const [isRegistered, setIsRegistered] = useState(false);
 
@@ -108,7 +111,7 @@ const EventDetails = ({ setCurrentPage }) => {
   };
 
   const handleRegistration = () => {
-    setCurrentPage('event-registration');
+    navigate(`/event-registration/${id || event.id}`);
   };
 
   const formatDate = (dateString) => {
@@ -127,7 +130,7 @@ const EventDetails = ({ setCurrentPage }) => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
           <button
-            onClick={() => setCurrentPage('events')}
+            onClick={() => navigate('/events')}
             className="flex items-center text-[#1F7A8C] hover:text-[#022B3A] transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />

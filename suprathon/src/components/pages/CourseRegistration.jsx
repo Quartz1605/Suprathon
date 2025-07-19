@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, CreditCard, Shield, CheckCircle, User, Mail, Phone, Calendar, Star, Clock, Users, BookOpen, Award } from 'lucide-react';
 import Button from '../ui/Button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/Card';
 import Badge from '../ui/Badge';
 
-const CourseRegistration = ({ setCurrentPage }) => {
+const CourseRegistration = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     personalInfo: {
@@ -416,10 +419,10 @@ const CourseRegistration = ({ setCurrentPage }) => {
         </div>
       </div>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Button onClick={() => setCurrentPage('courses')}>
+        <Button onClick={() => navigate('/courses')}>
           Browse More Courses
         </Button>
-        <Button variant="outline" onClick={() => setCurrentPage('profile')}>
+        <Button variant="outline" onClick={() => navigate('/profile')}>
           Go to Profile
         </Button>
       </div>
@@ -432,7 +435,7 @@ const CourseRegistration = ({ setCurrentPage }) => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
           <button
-            onClick={() => setCurrentPage('course-details')}
+            onClick={() => navigate(`/course-details/${id}`)}
             className="flex items-center text-[#1F7A8C] hover:text-[#022B3A] transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
