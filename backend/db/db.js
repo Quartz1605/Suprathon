@@ -70,7 +70,7 @@ const InstituteSchema = new Schema({
   
 })
 
-const CourseSchema = new Schema({
+const CourseSchema = new Schema({    // Registration count pending
   
   Title : {
     type : String,
@@ -105,7 +105,8 @@ const CourseSchema = new Schema({
   }
 })
 
-const EventSchema = new Schema({
+
+const EventSchema = new Schema({    // Registration count pending
   Title : {
     type:String,
     required:[true, "Event Title is required"]
@@ -152,6 +153,54 @@ const EventSchema = new Schema({
   }
 })
 
+const BookmarkSchema = new mongoose.Schema({
+  userId: {
+    type: ObjectId,
+    ref: 'UserModel',
+    required: true,
+  },
+  itemId: {
+    type: ObjectId,
+    required: true,
+  },
+  itemType: {
+    type: String,
+    enum: ['event', 'course'],
+    required: true,
+  },
+  addedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+const RegistrationSchema = new Schema({
+
+  eventCourseId : {
+    type : ObjectId,
+    required : [true,"Event Id is required !"],
+    unique : true
+  },
+
+  userEmail : {
+    type : String,
+    required : [true,"User Email is required !"],
+  },
+
+  certificateIssued : {
+    type : Boolean,
+    default : false
+  },
+
+  type : {
+    type : String,
+    enum : ["Event","Course"],
+    required : [true,"Event type is mandatory."]
+  }
+
+  // payemnt Can be added.
+
+})
+
 
 const CourseModel = mongoose.model("Courses",CourseSchema)
 
@@ -161,4 +210,9 @@ const InstituteModel = mongoose.model("Institutes",InstituteSchema)
 
 const EventModel = mongoose.model("Events", EventSchema)
 
-export {UserModel,InstituteModel,CourseModel, EventModel}
+const BookmarkModel = mongoose.model("Bookmarks", BookmarkSchema)
+
+export {UserModel,InstituteModel,CourseModel, EventModel, BookmarkModel}
+const RegistrationModel = mongoose.model("Registrations",RegistrationSchema)
+
+export {UserModel,InstituteModel,CourseModel, EventModel,RegistrationModel}

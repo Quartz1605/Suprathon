@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 
-const CourseMiddleware = (req,res,next) => {
+const UserMiddleware = (req,res,next) => {
 
   const token = req.cookies.jwt
 
@@ -11,13 +11,12 @@ const CourseMiddleware = (req,res,next) => {
   const isVerified = jwt.verify(token,process.env.JWT_SECRET);
 
   if(isVerified){
-    req.id = isVerified.id
-    console.log(req.id)
+    req.email = isVerified.email
     next();
   }else{
-    res.status(403).send("Tokens are expired")
+    return res.status(403).send("Tokens are expired")
   }
 
 }
 
-export {CourseMiddleware}
+export {UserMiddleware}
