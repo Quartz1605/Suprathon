@@ -100,8 +100,18 @@ const CourseSchema = new Schema({    // Registration count pending
     type:String,
   },
 
+  Desc:{
+    type:String,
+    default:""
+  },
+
   TotalHours:{
     type:Number
+  },
+
+  registeredCount: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -115,6 +125,11 @@ const EventSchema = new Schema({    // Registration count pending
   shortDesc:{
     type:String,
     required:[true, "Event short desc is required"]
+  },
+
+  Desc:{
+    type:String,
+    default:""
   },
 
   Creator:{
@@ -150,6 +165,16 @@ const EventSchema = new Schema({    // Registration count pending
   Prizes:{
     type:Number,
     required:[true, "Event Prizes are required"]
+  },
+
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+
+  registeredCount: {
+    type: Number,
+    default: 0
   }
 })
 

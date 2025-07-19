@@ -8,7 +8,7 @@ import { ProfileModel } from "../db/db.js";
 
 
 
-const fetchRegistrations = async (email) => {
+const fetchRegistrations = async (email) => {      // Call From Function in the bottom
   const registrations = await RegistrationModel.find({ userEmail: email });
 
   const registeredEventsIds = registrations
@@ -26,7 +26,7 @@ const fetchRegistrations = async (email) => {
 };
 
 //Fetches bookmarked courses and events for a user
-const fetchBookmarks = async (email) => {
+const fetchBookmarks = async (email) => {        // Call From Function in the bottom
   const bookmarks = await BookmarkModel.find({ emailId: email });
 
   const bookmarkedEventIds = bookmarks
@@ -76,7 +76,7 @@ export const updateProfile = async (req, res) => {
 }
 
 // Adds fake progress to each course object
-const simulateCourseProgress = (courses) => {
+const simulateCourseProgress = (courses) => {         // Call From Function in the bottom
   return courses.map(course => ({
     ...course._doc,
     progress: Math.floor(Math.random() * 101) // 0 to 100%
@@ -84,8 +84,8 @@ const simulateCourseProgress = (courses) => {
 };
 
 
-// Main dashboard controller
-export const getUserDashboard = async (req, res) => {    // For Courses, Events, Bookmarks
+// For Courses, Events, Bookmarks
+export const getUserDashboard = async (req, res) => {    
   const email = req.email;
 
   try {

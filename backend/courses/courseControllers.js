@@ -3,7 +3,7 @@ import { InstituteModel } from "../db/db.js";
 
 export const addCourseController = async(req, res) =>{
     
-    const {Title, Language, Price, shortDesc, TotalHours} = req.body
+    const {Title, Language, Price, shortDesc, Desc,  TotalHours} = req.body
 
     if(!Title || !Language || !Price || !shortDesc || !TotalHours){
         return res.status(400).json({"message" : "Necessary details are not provided."})

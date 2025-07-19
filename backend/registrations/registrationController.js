@@ -29,7 +29,11 @@ const eventRegistrationController = async(req,res) => {
       "eventCourseId" : event._id,
       "userEmail" : user.email,
       "type" : "Event"
-    })
+    });
+
+    await EventModel.findByIdAndUpdate(event._id, {
+      $inc: { registeredCount: 1 }
+    });
 
     if(registration){
       return res.status(201).json({"message" : "Registered successfully"})
@@ -69,6 +73,10 @@ const courseRegistrationController = async(req,res) => {
     "userEmail" : email,
     "type" : "Course"
   })
+
+  await CourseModel.findByIdAndUpdate(event._id, {
+    $inc: { registeredCount: 1 }
+  });
 
   if(registration){
     return res.status(201).json({"message" : "Registered successfully"})
