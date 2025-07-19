@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, User, Mail, Phone, Lock, CheckCircle, UserPlus } from 'lucide-react';
+import axios from 'axios';
 
 const UserSignup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    phone: '',
+    phoneNumber: '',
     email: '',
     password: ''
   });
@@ -15,11 +16,12 @@ const UserSignup = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    // Prevent accidental addition of 'phone' field (not phoneNumber)
+    if (name === 'phone') return;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
-    
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
@@ -40,10 +42,10 @@ const UserSignup = () => {
       newErrors.lastName = 'Last name is required';
     }
     
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^\+?[\d\s-()]+$/.test(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
+    if (!formData.phoneNumber.trim()) {
+      newErrors.phoneNumber = 'Phone number is required';
+    } else if (!/^\+?[\d\s-()]+$/.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = 'Please enter a valid phone number';
     }
     
     if (!formData.email.trim()) {
@@ -64,19 +66,33 @@ const UserSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const newErrors = validateForm();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
+    try{
+
+      console.log(formData)
+      
+      const response = await axios.post("http://localhost:3000/user/signup",formData,{
+        headers : {
+          "Content-Type" : "application/json"
+        }
+      })
+
+      if(response.status === 201){
+        
+        console.log(response.data)
+
+        alert("SignUped Successfully.")
+        
+
+      }else{
+
+        alert("Error registering you")
+
+      }
+
+    }catch(e){
+      alert("backend error happened " + e)
     }
-    
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    alert('Account created successfully!');
-    setIsSubmitting(false);
+
   };
 
   return (
@@ -169,20 +185,20 @@ const UserSignup = () => {
                 </div>
                 <input
                   type="tel"
-                  name="phone"
-                  value={formData.phone}
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
                   onChange={handleInputChange}
                   placeholder="+91 98765 43210"
                   className={`w-full pl-10 pr-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1F7A8C] transition-all duration-200 ${
-                    errors.phone 
+                    errors.phoneNumber 
                       ? 'border-red-400 focus:border-red-400 focus:ring-red-200' 
                       : 'border-gray-200 focus:border-[#1F7A8C] hover:border-gray-300'
                   }`}
                 />
               </div>
-              {errors.phone && (
+              {errors.phoneNumber && (
                 <p className="text-sm text-red-500 mt-1">
-                  {errors.phone}
+                  {errors.phoneNumber}
                 </p>
               )}
             </div>
