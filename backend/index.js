@@ -4,6 +4,10 @@ import mongoose from "mongoose"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import { UserRoutes } from "./auth/authRoutes.js"
+import { CourseRoutes } from "./courses/courseRoutes.js"
+import { InstituteRoutes } from "./institute/instituteRoutes.js"
+import { EventRoutes } from "./events/eventRoutes.js"
+import { CourseMiddleware } from "./middlewares/CourseMiddleware.js"
 
 dotenv.config()
 
@@ -19,7 +23,19 @@ app.get("/",(req,res) => {
   res.send("Welcome to the backend.")
 })
 
+// Auth 
 app.use("/api/v1/auth",UserRoutes)
+
+// Courses
+app.use("/api/v1/courses",CourseMiddleware ,CourseRoutes)
+
+
+
+// Institute routes
+app.use("/api/v1/institute/auth",InstituteRoutes)
+
+// Events
+app.use("/events", EventRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:3000`)
