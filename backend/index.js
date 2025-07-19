@@ -35,7 +35,7 @@ app.use("/api/v1/courses",CourseMiddleware ,CourseRoutes)
 app.use("/api/v1/institute/auth",InstituteRoutes)
 
 // Events
-app.use("/events", EventRoutes)
+app.use("/events", CourseMiddleware, EventRoutes)   // Event MiddleWare ??
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:3000`)
