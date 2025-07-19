@@ -14,6 +14,7 @@ import { RegistrationRoutes } from "./registrations/registrationRoutes.js"
 import { UserMiddleware } from "./middlewares/UserMiddleware.js"
 import { ChatbotRoutes } from "./chatbot/ChatbotRoutes.js"
 import { pdFGenRoutes } from "./pdfGenerator/pdfGeneratorRoutes.js"
+import { ReviewRoutes } from "./reviews/reviewRoutes.js"
 
 dotenv.config()
 
@@ -48,7 +49,7 @@ app.use("/api/v1/registration",UserMiddleware,RegistrationRoutes)
 
 
 //Bookmark Routes
-app.use("/api/v1/bookmarks", UserMiddleware, BookmarkRoutes)   // Not Tested Yet. User Middleware ??
+app.use("/api/v1/bookmarks", UserMiddleware, BookmarkRoutes)   
 
 // Dashboard
 app.use("/api/v1/dashboard", UserMiddleware, DashboardRoutes) 
@@ -59,8 +60,13 @@ app.use("/api/v1/chat",ChatbotRoutes) //Some DB errors need to be resolved.
 
 
 //Certificate generator routes.
+app.use("/api/v1/certificate",UserMiddleware,pdFGenRoutes) //Frontend mein Blob or something.
 
-app.use("/api/v1/certificate",UserMiddleware,pdFGenRoutes)
+
+//Review routes
+app.use("/api/v1",UserMiddleware,ReviewRoutes)
+
+
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:3000`)

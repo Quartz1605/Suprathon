@@ -260,6 +260,38 @@ const ProfileSchema = new mongoose.Schema({
     // ],
 });
 
+const ReviewSchema = new Schema({
+
+  userEmail : {
+    type : String,
+    required : [true,"User Email is required !"],
+  },
+
+  eventCourseId : {
+    type : ObjectId,
+    required : [true,"Event Id is required !"],
+    unique : true
+  },
+
+  type : {
+    type : String,
+    enum : ["Event","Course"],
+    required : [true,"Event type is mandatory."]
+  },
+
+  review : {
+    type : String,
+    required : [true,"Review is mandatory."]
+  },
+
+  rating : {
+    type : Number,
+    enum : [1,2,3,4,5],
+    default : 5
+  }
+
+})
+
 
 const CourseModel = mongoose.model("Courses",CourseSchema)
 
@@ -276,4 +308,6 @@ const RegistrationModel = mongoose.model("Registrations",RegistrationSchema)
 
 const ProfileModel = mongoose.model("Profile", ProfileSchema)
 
-export {UserModel,InstituteModel,CourseModel, EventModel,RegistrationModel, BookmarkModel, ProfileModel}
+const ReviewModel = mongoose.model("Reviews",ReviewSchema)
+
+export {UserModel,InstituteModel,CourseModel, EventModel,RegistrationModel, BookmarkModel, ProfileModel,ReviewModel}
