@@ -42,7 +42,7 @@ function App() {
       case 'login':
         return (
           <div className="min-h-screen bg-gradient-to-br from-[#FFFFFF] to-[#E1E5F2] flex items-center justify-center">
-            <UserLogin />
+            <UserLogin setCurrentPage={setCurrentPage} />
           </div>
         )
       case 'course-details':

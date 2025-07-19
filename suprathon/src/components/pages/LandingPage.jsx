@@ -87,17 +87,17 @@ const LandingPage = ({ setCurrentPage }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFFFFF] via-[#E1E5F2] to-[#BFDBF7]">
       {/* Hero Section */}
-      <section className="relative py-20 px-4">
+      <section className="relative py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="mb-8">
-            <Badge variant="secondary" className="mb-4 px-6 py-2 text-sm">
+          <div className="mb-6 sm:mb-8">
+            <Badge variant="secondary" className="mb-3 sm:mb-4 px-4 sm:px-6 py-2 text-xs sm:text-sm">
               🚀 Join 10,000+ Students Learning Online
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold text-[#022B3A] mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-[#022B3A] mb-4 sm:mb-6 leading-tight">
               Your Gateway to
               <span className="text-[#1F7A8C] block">Learning Excellence</span>
             </h1>
-            <p className="text-xl md:text-2xl text-[#1F7A8C] mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#1F7A8C] mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-4">{/* Rest of content */}
               Connect with top institutes, discover amazing courses, attend live events, and accelerate your learning journey with personalized guidance.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -172,16 +172,16 @@ const LandingPage = ({ setCurrentPage }) => {
       </section>
 
       {/* Featured Courses */}
-      <section className="py-16 bg-[#E1E5F2]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#022B3A] mb-4">Featured Courses</h2>
-            <p className="text-xl text-[#1F7A8C] max-w-2xl mx-auto">
+      <section className="py-12 sm:py-16 bg-[#E1E5F2]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#022B3A] mb-3 sm:mb-4">Featured Courses</h2>
+            <p className="text-base sm:text-lg lg:text-xl text-[#1F7A8C] max-w-2xl mx-auto px-4">
               Discover our most popular courses from top-rated institutes
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {featuredCourses.map((course) => (
               <Card key={course.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                 <div className="relative">

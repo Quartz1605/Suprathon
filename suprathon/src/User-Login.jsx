@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, LogIn } from 'lucide-react';
 
-const UserLogin = () => {
+const UserLogin = ({ setCurrentPage }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -218,9 +218,13 @@ const UserLogin = () => {
             <div className="text-center">
               <p className="text-sm text-gray-600">
                 Don't have an account?{' '}
-                <a href="#" className="font-medium hover:underline text-[#1F7A8C] hover:text-[#022B3A]">
+                <button 
+                  type="button"
+                  onClick={() => setCurrentPage('signup')}
+                  className="font-medium hover:underline text-[#1F7A8C] hover:text-[#022B3A] cursor-pointer"
+                >
                   Sign up here
-                </a>
+                </button>
               </p>
             </div>
           </form>
