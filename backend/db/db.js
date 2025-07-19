@@ -154,9 +154,8 @@ const EventSchema = new Schema({    // Registration count pending
 })
 
 const BookmarkSchema = new mongoose.Schema({
-  userId: {
-    type: ObjectId,
-    ref: 'UserModel',
+  emailId: {
+    type: String,
     required: true,
   },
   itemId: {
@@ -167,11 +166,7 @@ const BookmarkSchema = new mongoose.Schema({
     type: String,
     enum: ['event', 'course'],
     required: true,
-  },
-  addedAt: {
-    type: Date,
-    default: Date.now,
-  },
+  }
 });
 const RegistrationSchema = new Schema({
 
@@ -201,6 +196,45 @@ const RegistrationSchema = new Schema({
 
 })
 
+const ProfileSchema = new mongoose.Schema({
+    emailId: {
+      type: String,
+      required: true,
+      unique: true, // One profile per email
+    },
+    about: {
+      type: String,
+      default: "",
+    },
+    skills: {
+      type: [String],
+      default: [],
+    },
+    college: {
+      type: String,
+      default: "",
+    },
+    education: {
+      type: String,
+      default: "",
+    },
+    socialLinks: {
+      linkedin: { type: String, default: "" },
+      github: { type: String, default: "" },
+      twitter: { type: String, default: "" },
+      portfolio: { type: String, default: "" },
+    },
+    // certificates: [
+    //   {
+    //     title: String,
+    //     issuedBy: String,
+    //     date: Date,
+    //     courseOrEvent: String,
+    //     fileUrl: String, // Optional if you want to upload certificates
+    //   },
+    // ],
+});
+
 
 const CourseModel = mongoose.model("Courses",CourseSchema)
 
@@ -215,4 +249,6 @@ const BookmarkModel = mongoose.model("Bookmarks", BookmarkSchema)
 
 const RegistrationModel = mongoose.model("Registrations",RegistrationSchema)
 
-export {UserModel,InstituteModel,CourseModel, EventModel,RegistrationModel,BookmarkModel}
+const ProfileModel = mongoose.model("Profile", ProfileSchema)
+
+export {UserModel,InstituteModel,CourseModel, EventModel,RegistrationModel, BookmarkModel, ProfileModel}

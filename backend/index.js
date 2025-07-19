@@ -42,16 +42,15 @@ app.use("/api/v1/institute/auth",InstituteRoutes)
 app.use("/api/v1/events",InstituteMiddleware ,EventRoutes)
 
 
-//Registration routes
-
+//Course & Events Registration routes
 app.use("/api/v1/registration",UserMiddleware,RegistrationRoutes)
 
 
 //Bookmark Routes
-app.use("api/v1/bookmarks", BookmarkRoutes)   // Not Tested Yet. User Middleware ??
+app.use("/api/v1/bookmarks", UserMiddleware, BookmarkRoutes)   // Not Tested Yet. User Middleware ??
 
 // Dashboard
-app.use("api/v1/dashboard", DashboardRoutes) 
+app.use("/api/v1/dashboard", UserMiddleware, DashboardRoutes) 
 
 
 // Chatbot routes
@@ -59,7 +58,7 @@ app.use("/api/v1/chat",ChatbotRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:3000`)
-})
+})  
 
 
 
