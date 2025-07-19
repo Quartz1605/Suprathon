@@ -212,7 +212,7 @@ const EventModel = mongoose.model("Events", EventSchema)
 
 const BookmarkModel = mongoose.model("Bookmarks", BookmarkSchema)
 
-export {UserModel,InstituteModel,CourseModel, EventModel, BookmarkModel}
+
 const RegistrationModel = mongoose.model("Registrations",RegistrationSchema)
 
-export {UserModel,InstituteModel,CourseModel, EventModel,RegistrationModel}
+export {UserModel,InstituteModel,CourseModel, EventModel,RegistrationModel,BookmarkModel}

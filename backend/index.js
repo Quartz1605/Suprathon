@@ -12,6 +12,7 @@ import { BookmarkRoutes } from "./bookmarks/bookmarkRoutes.js"
 import { DashboardRoutes } from "./dashboard/dashboardRoutes.js"
 import { RegistrationRoutes } from "./registrations/registrationRoutes.js"
 import { UserMiddleware } from "./middlewares/UserMiddleware.js"
+import { ChatbotRoutes } from "./chatbot/ChatbotRoutes.js"
 
 dotenv.config()
 
@@ -51,6 +52,10 @@ app.use("api/v1/bookmarks", BookmarkRoutes)   // Not Tested Yet. User Middleware
 
 // Dashboard
 app.use("api/v1/dashboard", DashboardRoutes) 
+
+
+// Chatbot routes
+app.use("/api/v1/chat",ChatbotRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log(`http://localhost:3000`)
