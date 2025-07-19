@@ -81,8 +81,8 @@ const CourseSchema = new Schema({
     type:ObjectId,
   },
 
-  Creator:{
-    type:String,  // Obnject ID  in future 
+  CreatorName:{
+    type:String,   
     required:[true, "Creator is required"]
   },
 

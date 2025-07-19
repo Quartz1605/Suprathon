@@ -7,6 +7,7 @@ import { UserRoutes } from "./auth/authRoutes.js"
 import { CourseRoutes } from "./courses/courseRoutes.js"
 import { InstituteRoutes } from "./institute/instituteRoutes.js"
 import { EventRoutes } from "./events/eventRoutes.js"
+import { CourseMiddleware } from "./middlewares/CourseMiddleware.js"
 
 dotenv.config()
 
@@ -26,13 +27,13 @@ app.get("/",(req,res) => {
 app.use("/api/v1/auth",UserRoutes)
 
 // Courses
-app.use("/courses", CourseRoutes)
+app.use("/courses",CourseMiddleware ,CourseRoutes)
 
 // Auth routes
 app.use("/api/v1/auth",UserRoutes)
 
 
-// Institute
+// Institute routes
 app.use("/api/v1/institute/auth",InstituteRoutes)
 
 // Events
